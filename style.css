@@ -1,0 +1,79 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Sen', sans-serif;
+    align-items: center;
+}
+
+.information-box {
+    width: 40vw;
+    float: left;
+    height: 100vh;
+    background-color: #ffe6e6;
+}
+
+.information-header {
+    padding-top: 5vh;
+    padding-left: 40px;
+}
+
+.information-paragraph {
+    padding-left: 40px;
+    padding-right: 40px;
+    line-height: 1.5;
+}
+
+.action-box {
+    width: 60vw;
+    float: right;
+    height: 100vh;
+}
+
+.splash-header {
+    margin-top: 35vh;
+    font-size: 40px;
+    text-align: center;
+}
+
+.patient-button {
+    background-image: linear-gradient(to bottom right, #6699ff, #0000ff);
+    width: 250px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid white;
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+    transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+}
+
+.patient-button:hover {
+    border: 2px solid #6699ff;
+    background-color: white;
+    background-image: none;
+    color: #0000ff;
+}
+
+.professional-button {
+    background-image: linear-gradient(to bottom right, #33cc33, #339933);
+    width: 250px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid white;
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+}
+
+.professional-button:hover {
+    border: 2px solid #33cc33;
+    background-color: white;
+    background-image: none;
+    color: #339933;
+}
