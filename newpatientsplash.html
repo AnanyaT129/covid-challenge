@@ -13,31 +13,96 @@
 <body>
     <div class="information-box">
         <h1 class="information-header">How to register</h1>
-        <p class="information-paragraph">If you are </p>
+        <p class="information-paragraph">If you are a new patient, you're in the right place! Fillng out the form to the
+            right will enable our system to assess your risk level and pass your case on to healthcare professionals.
+        </p>
+
+        <p class="information-paragraph">To register, please fill out the form to the right with the correct
+            information. When you get to the contact tracing section, please try to fill it out as thoroughly as
+            possible to help us alert those who may have been exposed. It is okay if you cannot remember all of the
+            places you have been.
+        </p>
+
+        <p class="information-paragraph">When you get to the end of the form, you will see your automatically evaluated
+            risk level. This does not mean you should not continue to follow the CDC's guidance, maintain proper
+            hygiene, and self-isolate if you suspect you are ill.
+        </p>
 
     </div>
 
     <div class="action-box">
-        <h1 class="patient-header">Start by filling out each<br> field below.</h1>
+        <h1 class="patient-header">Start by filling out each field below</h1>
 
         <table>
             <tr>
-                <td>First Name</td>
-                <td><input></input></td>
+                <td class='patient-table-left'>First Name</td>
+                <td>
+                    <input class="patient-input" placeholder="John"></input>
+                </td>
             </tr>
             <tr>
-                <td>Last Name</td>
-                <td><input></input></td>
+                <td class='patient-table-left'>Last Name</td>
+                <td>
+                    <input class="patient-input" placeholder="Doe"> </input>
+                </td>
             </tr>
             <tr>
-                <td>Email Address</td>
-                <td><input></input></td>
+                <td class='patient-table-left'>Email Address</td>
+                <td>
+                    <input class="patient-input" type="email" placeholder="person@example.com"></input>
+                </td>
             </tr>
             <tr>
-                <td>Date of Birth</td>
-                <td><input></input></td>
+                <td class='patient-table-left'>Date of Birth</td>
+                <td>
+                    <input class="patient-input" type="date" placeholder="03/31/1993"
+                        pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
+                </td>
+            </tr>
+            <tr>
+                <td class='patient-table-left'>Phone Number</td>
+                <td>
+                    <input class="patient-input" type="tel" placeholder="(012) 345-6789"
+                        pattern="([0-9]{3}) [0-9]{3}-[0-9]{4}" required></input>
+                </td>
+            </tr>
+
+            <tr>
+                <td class='patient-table-left'>Home Address</td>
+                <td>
+                    <input class="patient-input" type="text" placeholder="1 Neverending Road"></input>
+                    <input class="patient-input" type="text" placeholder="Lancaster, PA 17601"></input>
+                </td>
+            </tr>
+
+            <tr>
+                <td class='patient-table-left'>Symptoms</td>
+                <td>
+                    <input class="patient-input" type="checkbox"> Fever</input>
+                    <br>
+                    <input class="patient-input" type="checkbox"> Cough</input>
+                    <br>
+                    <input class="patient-input" type="checkbox"> Shortness of breath</input>
+                    <br>
+                    <input class="patient-input" type="checkbox"> Difficulty breathing</input>
+                    <br>
+                    <input class="patient-input" type="checkbox"> Pain or pressure in the chest</input>
+                    <br>
+                    <input class="patient-input" type="checkbox"> Confusion</input>
+                    <br>
+                    <input class="patient-input" type="checkbox"> Bluish lips or face</input>
+                    <br>
+                    <input class="patient-input" type="checkbox"> Diarrhea</input>
+                </td>
             </tr>
         </table>
+
+        <!--
+            To add:
+                Preexisting conditions
+                Last 4 digits of SSN
+                Autogenerating password
+        -->
     </div>
 
     <script>

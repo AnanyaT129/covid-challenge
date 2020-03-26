@@ -11,6 +11,7 @@ body {
     width: 40vw;
     float: left;
     height: 100vh;
+    position: fixed;
     background-color: #ffe6e6;
 }
 
@@ -33,14 +34,12 @@ body {
 
 .splash-header {
     margin-top: 35vh;
-    font-size: 40px;
     text-align: center;
 }
 
 .patient-header {
-    margin-top: 8vh;
-    font-size: 40px;
-    text-align: center;
+    padding-top: 5vh;
+    padding-left: 40px;
 }
 
 .patient-button {
@@ -100,4 +99,45 @@ body {
     padding-bottom: 2px;
     background-color: #696969;
     border-bottom: 2px solid black;
+}
+
+table {
+    padding-top: 5vh;
+    padding-left: 36px;
+    font-size: 20px;
+    width: 50vw;
+}
+
+td {
+    padding-bottom: 25px;
+}
+
+.patient-table-left {
+    vertical-align: top;
+    width: 35%;
+}
+
+.patient-input {
+    height: 20px;
+    font-size: 20px;
+    font-family: 'Sen', sans-serif !important;
+    border: 0px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    border-bottom: 2px solid black;
+    margin-bottom: 10px;
+    transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+}
+
+.patient-input:focus {
+    height: 20px;
+    font-size: 20px;
+    font-family: 'Sen', sans-serif !important;
+    border: 0px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    border-bottom: 2px solid gray;
+    margin-bottom: 10px;
+    outline: none;
 }
