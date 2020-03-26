@@ -36,14 +36,19 @@
         <h1 class="splash-header">I am a...</h1>
 
         <center>
-            <button class="patient-button" onclick="patientRedirect()">Patient</button><br>
+            <button class="patient-button" onclick="newPatientRedirect()">New Patient</button><br>
+            <button class="patient-button" onclick="registeredPatientRedirect()">Registered Patient</button><br>
             <button class="professional-button" onclick="professionalRedirect()">Medical Professional</button>
         </center>
     </div>
 
     <script>
-        function patientRedirect() {
-            window.location = "patientsplash.html";
+        function newPatientRedirect() {
+            window.location = "newpatientsplash.html";
+        }
+
+        function registeredPatientRedirect() {
+            window.location = "registeredpatientsplash.html";
         }
 
         function professionalRedirect() {
