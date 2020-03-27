@@ -76,61 +76,131 @@
             </tr>
 
             <tr>
+                <td class='patient-table-left'>Sex</td>
+                <td>
+                    <label>
+                        <input class="patient-input" type="radio" name="sex"></input> Male
+                    </label>
+                    <label>
+                        <input class="patient-input" type="radio" name="sex"></input> Female
+                    </label>
+                    <label>
+                        <input class="patient-input" type="radio" name="sex"></input> Other
+                    </label>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td class='patient-table-left'>Ethnicity</td>
+                <td>
+                    <label>
+                        <input class="patient-input" type="radio" name="ethnicity"></input> Hispanic/Latino
+                    </label>
+                    <label>
+                        <input class="patient-input" type="radio" name="ethnicity"></input> Non Hispanic/Latino
+                    </label>
+                    <label>
+                        <input class="patient-input" type="radio" name="ethnicity"></input> Not specified
+                    </label>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td class='patient-table-left'>Race (check all that apply)</td>
+                <td>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Asian
+                    </label>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Black
+                    </label>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> White
+                    </label>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> American Indian/Alaska Native
+                    </label>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Native Hawaiian/Other Pacific Islander
+                    </label>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Unknown
+                    </label>
+                    Other: <input class="patient-input" type="text" placeholder="..."></input>
+                </td>
+            </tr>
+
+            <tr>
+                <td class='patient-table-left'>Are you a healthcare worker in the United States?</td>
+                <td>
+                    <label>
+                        <input class="patient-input" type="radio" name="worker"></input> Yes
+                    </label>
+                    <label>
+                        <input class="patient-input" type="radio" name="worker"></input> No
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td class='patient-table-left'>Do you have a history of being in a healthcare facility (as a patient,
+                    worker or visitor) in China?</td>
+                <td>
+                    <label>
+                        <input class="patient-input" type="radio" name="china"></input> Yes
+                    </label>
+                    <label>
+                        <input class="patient-input" type="radio" name="china"></input> No
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
                 <td class='patient-table-left'>Symptoms</td>
                 <td>
                     <label>
                         <input class="patient-input" type="checkbox"></input> Fever > 100.4F
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Subjective fever (felt
                         feverish)
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Chills
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Muscle aches (myalgia)
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Runny nose (rhinorrhea)
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Sore throat
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Cough (new or worsening chronic
                         cough)
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Shortness of breath
                         (dyspnea)
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Nausea or vomiting
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Headache
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Abdominal pain
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Diarrhea (≥3 loose/looser than
                         normal stools/24hr
                         period)
                     </label>
-
                     Other: <input class="patient-input" type="text" placeholder="..."></input>
                 </td>
             </tr>
@@ -142,73 +212,126 @@
                         <input class="patient-input" type="checkbox"></input> Chronic Lung Disease
                         (asthma/emphysema/COPD)
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Diabetes Mellitus
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Cardiovascular disease
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Chronic Renal diseases
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Chronic Liver disease
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Immunocompromised Condition
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input>
                         Neurologic, neurodevelopmental, and/or intellectual disability
                         (Please specify: <input class="patient-input" type="text" placeholder="..."></input>)
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input>
                         Other chronic diseases (Please specify: <input class="patient-input" type="text"
                             placeholder="..."></input>)
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> If female, currently pregnant
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Current smoker
                     </label>
-
                     <label>
                         <input class="patient-input" type="checkbox"></input> Former smoker
                     </label>
-
                     Other: <input class="patient-input" type="text" placeholder="..."></input>
                 </td>
             </tr>
 
             <tr>
-                <td class='patient-table-left'>In the last 14 days, have you been in contact with a person who has
-                    tested positive for Covid-19?</td>
+                <td class='patient-table-left'>In the 14 days prior to illness onset, did you have any of the following
+                    exposures (check all that apply)?</td>
                 <td>
                     <label>
-                        <input class="patient-input" type="checkbox"></input>
-                        Yes, prolonged and/or close contact (within 6 feet)
+                        <input class="patient-input" type="checkbox"></input> Travel to Wuhan
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Yes, short contact (over 6 feet)
+                        <input class="patient-input" type="checkbox"></input> Travel to Hubei
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Maybe, I've been at a large gathering (10+
-                        attendees)
+                        <input class="patient-input" type="checkbox"></input> Travel to mainland China
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> No
+                        <input class="patient-input" type="checkbox"></input> Community contact with another
+                        lab-confirmed COVID-19 case-patient
                     </label>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Animal exposure
+                    </label>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Exposure to a cluster of patients with
+                        severe acute lower respiratory distress of unknown etiology
+                    </label>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Any healthcare contact with another
+                        lab-confirmed COVID-19 case-patient (Patient)
+                    </label>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Any healthcare contact with another
+                        lab-confirmed COVID-19 case-patient (Visitor)
+                    </label>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Any healthcare contact with another
+                        lab-confirmed COVID-19 case-patient (HCW)
+                    </label>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Household contact with another
+                        lab-confirmed COVID-19 case patient
+                    </label>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Unknown
+                    </label>
+                    Other: <input class="patient-input" type="text" placeholder="..."></input>
+                </td>
+            </tr>
+
+            <tr>
+                <td class='patient-table-left'>Please list any public places (and the dates you were there) that you
+                    have been in over the past 14 days.</td>
+                <td>
+                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                        pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
+                    <input class="patient-input-address" type="text" placeholder="Location one"></input>
+                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                        pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
+                    <input class="patient-input-address" type="text" placeholder="Location two"></input>
+                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                        pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
+                    <input class="patient-input-address" type="text" placeholder="Location three"></input>
+                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                        pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
+                    <input class="patient-input-address" type="text" placeholder="Location four"></input>
+                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                        pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
+                    <input class="patient-input-address" type="text" placeholder="Location five"></input>
+                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                        pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
+                    <input class="patient-input-address" type="text" placeholder="Location six"></input>
+                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                        pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
+                    <input class="patient-input-address" type="text" placeholder="Location seven"></input>
+                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                        pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
+                    <input class="patient-input-address" type="text" placeholder="Location eight"></input>
+                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                        pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
+                    <input class="patient-input-address" type="text" placeholder="Location nine"></input>
+                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                        pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
+                    <input class="patient-input-address" type="text" placeholder="Location ten"></input>
+
                 </td>
             </tr>
         </table>

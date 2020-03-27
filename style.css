@@ -137,6 +137,10 @@ label {
     outline: none;
 }
 
+.patient-input[type="date"] {
+    width: 110px;
+}
+
 .patient-input-address {
     height: 20px;
     font-size: 20px;
