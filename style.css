@@ -160,3 +160,7 @@ label {
     border-bottom: 2px solid gray;
     outline: none;
 }
+
+.parent-info {
+    display: none;
+}
