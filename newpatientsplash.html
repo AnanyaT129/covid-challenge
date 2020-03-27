@@ -70,38 +70,67 @@
             <tr>
                 <td class='patient-table-left'>Home address</td>
                 <td>
-                    <input class="patient-input" type="text" placeholder="1 Neverending Road"></input>
-                    <input class="patient-input" type="text" placeholder="Lancaster, PA 17601"></input>
+                    <input class="patient-input-address" type="text" placeholder="1 Neverending Road"></input>
+                    <input class="patient-input-address" type="text" placeholder="Lancaster, PA 17601"></input>
                 </td>
             </tr>
 
             <tr>
                 <td class='patient-table-left'>Symptoms</td>
                 <td>
-                    <input class="patient-input" type="checkbox"> Fever</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Cough</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Sneezing</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Headaches</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Shortness of breath</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Difficulty breathing</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Pain or pressure in the chest</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Confusion</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Bluish lips or face</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Diarrhea</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Loss of smell</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Loss of taste</input>
-                    <br>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Fever > 100.4F
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Subjective fever (felt
+                        feverish)
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Chills
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Muscle aches (myalgia)
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Runny nose (rhinorrhea)
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Sore throat
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Cough (new or worsening chronic
+                        cough)
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Shortness of breath
+                        (dyspnea)
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Nausea or vomiting
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Headache
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Abdominal pain
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Diarrhea (≥3 loose/looser than
+                        normal stools/24hr
+                        period)
+                    </label>
+
                     Other: <input class="patient-input" type="text" placeholder="..."></input>
                 </td>
             </tr>
@@ -109,24 +138,55 @@
             <tr>
                 <td class='patient-table-left'>Pre-existing conditions</td>
                 <td>
-                    <input class="patient-input" type="checkbox"> Chronic lung disease</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Moderate asthma</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Severe asthma</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Serious heart condition</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Immunocompromisation</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Severe obesity</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Diabetes</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Renal failure</input>
-                    <br>
-                    <input class="patient-input" type="checkbox"> Liver disease</input>
-                    <br>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Chronic Lung Disease
+                        (asthma/emphysema/COPD)
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Diabetes Mellitus
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Cardiovascular disease
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Chronic Renal diseases
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Chronic Liver disease
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Immunocompromised Condition
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input>
+                        Neurologic, neurodevelopmental, and/or intellectual disability
+                        (Please specify: <input class="patient-input" type="text" placeholder="..."></input>)
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input>
+                        Other chronic diseases (Please specify: <input class="patient-input" type="text"
+                            placeholder="..."></input>)
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> If female, currently pregnant
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Current smoker
+                    </label>
+
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Former smoker
+                    </label>
+
                     Other: <input class="patient-input" type="text" placeholder="..."></input>
                 </td>
             </tr>
@@ -135,18 +195,22 @@
                 <td class='patient-table-left'>In the last 14 days, have you been in contact with a person who has
                     tested positive for Covid-19?</td>
                 <td>
-                    <input class="patient-input" type="radio" selected="selected"> Yes, prolonged and/or close contact
-                    (within 6
-                    feet)</input>
-                    <br>
-                    <input class="patient-input" type="radio" selected="selected"> Yes, short contact (over 6
-                    feet)</input>
-                    <br>
-                    <input class="patient-input" type="radio"> No</input>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input>
+                        Yes, prolonged and/or close contact (within 6 feet)
+                    </label>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Yes, short contact (over 6 feet)
+                    </label>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> Maybe, I've been at a large gathering (10+
+                        attendees)
+                    </label>
+                    <label>
+                        <input class="patient-input" type="checkbox"></input> No
+                    </label>
                 </td>
             </tr>
-
-
         </table>
 
         <!--
