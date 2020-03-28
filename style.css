@@ -45,10 +45,10 @@ body {
 .patient-button {
     background-image: linear-gradient(to bottom right, #3399ff, #0066ff);
     width: 250px;
-    height: 40px;
+    height: 50px;
     border-radius: 5px;
     border: 2px solid white;
-    font-size: 18px;
+    font-size: 20px;
     color: white;
     font-weight: bold;
     margin-bottom: 20px;
@@ -66,10 +66,10 @@ body {
 .professional-button {
     background-image: linear-gradient(to bottom right, #00cc00, #339933);
     width: 250px;
-    height: 40px;
+    height: 50px;
     border-radius: 5px;
     border: 2px solid white;
-    font-size: 18px;
+    font-size: 20px;
     color: white;
     font-weight: bold;
     transition-duration: 0.7s;
@@ -168,12 +168,15 @@ label {
 
 #info-password {
     width: 70%;
+    font-size: 20px;
+    font-weight: bold;
     text-align: center;
     padding-left: 15%;
 }
 
 #auto-password {
-    font-size: 40px;
+    font-size: 30px !important;
+    font-weight: bold;
     margin-left: 30%;
     text-align: center;
     width: 40%;

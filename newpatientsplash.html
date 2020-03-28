@@ -23,6 +23,10 @@
             places you have been.
         </p>
 
+        <p class="information-paragraph">If you are under the age of 18, the form will ask for the information of your
+            primary parent/guardian. This is to help us correctly find and update your medical records.
+        </p>
+
         <p class="information-paragraph">When you get to the end of the form, you will see your automatically evaluated
             risk level. This does not mean you should not continue to follow the CDC's guidance, maintain proper
             hygiene, and self-isolate if you suspect you are ill.
@@ -374,13 +378,26 @@
                 Last 4 digits of SSN
                 Autogenerating password
         -->
-        <h2 id="info-password">This is your password. Please write this down, as you will need it to log in to your
-            account.</h2>
+        <p id="info-password">This is your password. Please write this down, as you will need it to log in to your
+            account.</p>
         <p id="auto-password"></p>
+
+        <br><br><br><br>
+
+        <center>
+            <button class="patient-button" onclick="register()">Register</button><br>
+        </center>
+
+        <br><br><br>
 
     </div>
 
     <script>
+        function register() {
+            /*
+            Should evaluate patient risk and submit their profile
+            */
+        }
 
         function checkAge(dateOfBirth) {
             let age = new Date(dateOfBirth);
