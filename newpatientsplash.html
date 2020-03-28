@@ -365,7 +365,6 @@
                     <input class="patient-input" type="date" placeholder="03/20/2020"
                         pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
                     <input class="patient-input-address" type="text" placeholder="Location ten"></input>
-
                 </td>
             </tr>
         </table>
@@ -375,6 +374,10 @@
                 Last 4 digits of SSN
                 Autogenerating password
         -->
+        <h2 id="info-password">This is your password. Please write this down, as you will need it to log in to your
+            account.</h2>
+        <p id="auto-password"></p>
+
     </div>
 
     <script>
@@ -388,6 +391,16 @@
                 $('.parent-info').css('display', 'table-row');
             }
         }
+
+        $(document).ready(function () {
+            let password = "";
+
+            for (let i = 0; i < 9; i++) {
+                password += Math.floor(Math.random() * 10);
+            }
+
+            document.getElementById("auto-password").innerHTML = password;
+        });
     </script>
 </body>
 

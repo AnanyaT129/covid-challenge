@@ -109,11 +109,12 @@ table {
 }
 
 td {
-    padding-bottom: 25px;
+    padding-bottom: 60px;
 }
 
 .patient-table-left {
     vertical-align: top;
+    padding-left: 20px;
     width: 35%;
     font-weight: bold;
 }
@@ -163,4 +164,20 @@ label {
 
 .parent-info {
     display: none;
+}
+
+#info-password {
+    width: 70%;
+    text-align: center;
+    padding-left: 15%;
+}
+
+#auto-password {
+    font-size: 40px;
+    margin-left: 30%;
+    text-align: center;
+    width: 40%;
+    border-radius: 5px;
+    letter-spacing: 7px;
+    background-color: #ffe6e6;
 }
