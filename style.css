@@ -122,6 +122,12 @@ table {
     width: 50vw;
 }
 
+#medical-table {
+    width: 100vw;
+    padding-left: 36px;
+    padding-right: 36px;
+}
+
 th {
     text-align: left !important;
     padding-bottom: 10px;
@@ -129,6 +135,10 @@ th {
 
 #registration-table td {
     padding-bottom: 40px;
+}
+
+#medical-table td {
+    padding-bottom: 10px;
 }
 
 .patient-table-left {
