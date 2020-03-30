@@ -13,22 +13,35 @@
 <body>
     <div class="information-box">
         <h1 class="information-header">Information for registered patients</h1>
-        <p class="information-paragraph"></p>
+        <p class="information-paragraph">Once you are logged in to the patient portal, you will be able to edit your
+            personal information, see upcoming appointments, and view your test results.</p>
+
+        <p class="information-paragraph">Please remember to check the portal regularly to see if you have been
+            registered for an appointment.</p>
+
+        <p class="information-paragraph">You can always edit your personal information. However, doing so leads to a
+            re-evaluation of your risk and may rank you further down in the triage.</p>
 
     </div>
 
     <div class="action-box">
-        <h1 class="splash-header">Input your date of birth and auto-generated password below.
-        </h1>
+        <h1 class="splash-header">Input your date of birth and <br>auto-generated password below.</h1>
+        <br><br>
 
         <center>
             <input class="patient-input" type="date" placeholder="03/31/1993" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"
                 required></input>
             <input class="patient-input" type="number" placeholder="111111111" pattern="[0-9]{9}" required></input>
+            <br><br><br>
+            <button class="patient-button" onclick="redirect()">Sign in</button><br>
         </center>
     </div>
 
     <script>
+        function redirect() {
+            // Check login credentials
+            // Redirect to patient portal
+        }
     </script>
 </body>
 

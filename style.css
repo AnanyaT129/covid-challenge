@@ -20,10 +20,23 @@ body {
     padding-left: 40px;
 }
 
+.portal-header {
+    padding-top: 5vh;
+    padding-left: 40px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
 .information-paragraph {
     padding-left: 40px;
     padding-right: 40px;
     line-height: 1.5;
+}
+
+.information-bullets {
+    padding-left: 60px;
+    padding-right: 40px;
+    line-height: 1.7;
 }
 
 .action-box {
@@ -109,8 +122,13 @@ table {
     width: 50vw;
 }
 
-td {
-    padding-bottom: 60px;
+th {
+    text-align: left !important;
+    padding-bottom: 10px;
+}
+
+#registration-table td {
+    padding-bottom: 40px;
 }
 
 .patient-table-left {
@@ -184,4 +202,16 @@ label {
     border-radius: 5px;
     letter-spacing: 7px;
     background-color: #ffe6e6;
+}
+
+#personal-information-box {
+    display: none;
+}
+
+#appointments-box {
+    display: none;
+}
+
+#results-box {
+    display: none;
 }
