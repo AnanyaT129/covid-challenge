@@ -606,7 +606,9 @@
                     guardianPhoneNumber: guardianPhoneNumber,
                     guardianEmailAddress: guardianEmailAddress,
                     guardianAddress: guardianAddress,
-                    password: password
+                    password: password,
+                    appointments: '{}',
+                    results: '{}'
                 }).then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
                     docId = docRef.id;
@@ -636,7 +638,9 @@
                     existingConditions: existingConditions,
                     exposures: exposures,
                     contacts: contacts,
-                    password: password
+                    password: password,
+                    appointments: '{}',
+                    results: '{}'
                 }).then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
                     docId = docRef.id;
