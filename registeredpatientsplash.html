@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link href="https://fonts.googleapis.com/css?family=Sen:400,700&display=swap" rel="stylesheet">
     <title>Covid-19 Challenge</title>
@@ -29,9 +30,10 @@
         <br><br>
 
         <center>
-            <input class="patient-input" type="date" placeholder="03/31/1993" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"
+            <input id="dateOfBirth" class="patient-input" type="date" placeholder="03/31/1993"
+                pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
+            <input id="password" class="patient-input" type="number" placeholder="111111111" pattern="[0-9]{9}"
                 required></input>
-            <input class="patient-input" type="number" placeholder="111111111" pattern="[0-9]{9}" required></input>
             <br><br><br>
             <button class="patient-button" onclick="redirect()">Sign in</button><br>
         </center>
@@ -58,8 +60,18 @@
         firebase.analytics();
 
         function redirect() {
-            // Check login credentials
-            // Redirect to patient portal
+            var db = firebase.firestore();
+
+            db.collection("users").get().then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    if (doc.data().dateOfBirth == $('#dateOfBirth').val()) {
+                        if (doc.data().password == $('#password').val()) {
+                            Cookies.set("docId", doc.id);
+                            window.location = "patientportal.html";
+                        }
+                    }
+                })
+            });
         }
     </script>
 </body>

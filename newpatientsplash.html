@@ -490,13 +490,14 @@
             let ethnicity = $("input[name='ethnicity']:checked").val();
             let race = [];
 
-            if ($("#other-race").val() !== '') {
-                race.push($("#other-race").val());
-            }
-
             $.each($("input[name='race']:checked"), function () {
                 race.push($(this).val());
             });
+
+            if ($("#other-race").val() !== '') {
+                let string = '{' + $("#other-race").val() + '}';
+                race.push(string);
+            }
 
             race = race.join(", ");
 
@@ -506,45 +507,48 @@
             let resolutionDate = $("#resolutionDate").val();
             let symptoms = [];
 
-            if ($("#other-symptom").val() !== '') {
-                symptoms.push($("#other-symptom").val());
-            }
-
             $.each($("input[name='symptoms']:checked"), function () {
                 symptoms.push($(this).val());
             });
+
+            if ($("#other-symptom").val() !== '') {
+                let string = '{' + $("#other-symptom").val() + '}';
+                symptoms.push(string);
+            }
 
             symptoms = symptoms.join(", ");
 
             let existingConditions = [];
 
-            if ($("#other-condition").val() !== '') {
-                existingConditions.push($("#other-condition").val());
-            }
-
             $.each($("input[name='existing']:checked"), function () {
                 if ($(this).val() == "Neurologic, neurodevelopmental, and/or intellectual disability") {
-                    let string = $(this).val() + " (" + $("#other-disability").val() + ")";
+                    let string = '{' + $(this).val() + " (" + $("#other-disability").val() + ")" + "}";
                     existingConditions.push(string);
                 } else if ($(this).val() == "Other chronic diseases") {
-                    let string = $(this).val() + " (" + $("#other-chronic").val() + ")";
+                    let string = '{' + $(this).val() + " (" + $("#other-chronic").val() + ")" + "}";
                     existingConditions.push(string);
                 } else {
                     existingConditions.push($(this).val());
                 }
             });
 
+            if ($("#other-condition").val() !== '') {
+                let string = '{' + $("#other-condition").val() + '}';
+                existingConditions.push(string);
+            }
+
             existingConditions = existingConditions.join(", ");
 
             let exposures = [];
 
-            if ($("#other-exposure").val() !== '') {
-                exposures.push($("#other-exposure").val());
-            }
-
             $.each($("input[name='exposures']:checked"), function () {
                 exposures.push($(this).val());
             });
+
+            if ($("#other-exposure").val() !== '') {
+                let string = '{' + $("#other-exposure").val() + '}';
+                exposures.push(string);
+            }
 
             exposures = exposures.join(", ");
 
@@ -573,6 +577,8 @@
             let guardianPhoneNumber = $("#guardianPhoneNumber").val();
             let guardianEmailAddress = $("#guardianEmailAddress").val();
             let guardianAddress = $("#guardianAddressLine1").val() + ", " + $("#guardianAddressLine2").val();
+
+            let docId;
 
             if ($('.parent-info').css('display') == 'table-row') {
                 var db = firebase.firestore();
@@ -603,8 +609,11 @@
                     password: password
                 }).then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
+                    docId = docRef.id;
+
                 }).catch(function (error) {
                     console.error("Error adding document: ", error);
+                    alert("Please fill in all fields.");
                 });
             } else {
                 var db = firebase.firestore();
@@ -630,10 +639,15 @@
                     password: password
                 }).then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
+                    docId = docRef.id;
                 }).catch(function (error) {
                     console.error("Error adding document: ", error);
+                    alert("Please fill in all fields.");
                 });
             }
+
+            Cookies.set("docId", docId);
+            window.location = "patientportal.html";
         }
 
         function checkAge(dateOfBirth) {
