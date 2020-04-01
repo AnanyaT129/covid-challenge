@@ -488,7 +488,11 @@
             let homeAddress = $("#homeAddress1").val() + ", " + $("#homeAddress2").val();
             let sex = $("input[name='sex']:checked").val();
             let ethnicity = $("input[name='ethnicity']:checked").val();
-            let race = [$("#other-race").val()];
+            let race = [];
+
+            if ($("#other-race").val() !== '') {
+                race.push($("#other-race").val());
+            }
 
             $.each($("input[name='race']:checked"), function () {
                 race.push($(this).val());
@@ -500,7 +504,11 @@
             let healthcareChina = $("input[name='china']:checked").val();
             let onsetDate = $("#onsetDate").val();
             let resolutionDate = $("#resolutionDate").val();
-            let symptoms = [$("#other-symptom").val()];
+            let symptoms = [];
+
+            if ($("#other-symptom").val() !== '') {
+                symptoms.push($("#other-symptom").val());
+            }
 
             $.each($("input[name='symptoms']:checked"), function () {
                 symptoms.push($(this).val());
@@ -508,24 +516,31 @@
 
             symptoms = symptoms.join(", ");
 
-            let existingConditions = [$("#other-condition").val()];
+            let existingConditions = [];
+
+            if ($("#other-condition").val() !== '') {
+                existingConditions.push($("#other-condition").val());
+            }
 
             $.each($("input[name='existing']:checked"), function () {
-                existingConditions.push($(this).val());
-
                 if ($(this).val() == "Neurologic, neurodevelopmental, and/or intellectual disability") {
-                    existingConditions.push($("#other-disability").val());
-                }
-
-                if ($(this).val() == "Other chronic diseases") {
-                    existingConditions.push($("#other-chronic").val());
+                    let string = $(this).val() + " (" + $("#other-disability").val() + ")";
+                    existingConditions.push(string);
+                } else if ($(this).val() == "Other chronic diseases") {
+                    let string = $(this).val() + " (" + $("#other-chronic").val() + ")";
+                    existingConditions.push(string);
+                } else {
+                    existingConditions.push($(this).val());
                 }
             });
 
             existingConditions = existingConditions.join(", ");
 
+            let exposures = [];
 
-            let exposures = [$("#other-exposure").val()];
+            if ($("#other-exposure").val() !== '') {
+                exposures.push($("#other-exposure").val());
+            }
 
             $.each($("input[name='exposures']:checked"), function () {
                 exposures.push($(this).val());
@@ -534,19 +549,22 @@
             exposures = exposures.join(", ");
 
             let contacts = [
-                $("#location1").val() + " (" + $("#date1").val() + ") ",
-                $("#location2").val() + " (" + $("#date2").val() + ") ",
-                $("#location3").val() + " (" + $("#date3").val() + ") ",
-                $("#location4").val() + " (" + $("#date4").val() + ") ",
-                $("#location5").val() + " (" + $("#date5").val() + ") ",
-                $("#location6").val() + " (" + $("#date6").val() + ") ",
-                $("#location7").val() + " (" + $("#date7").val() + ") ",
-                $("#location8").val() + " (" + $("#date8").val() + ") ",
-                $("#location9").val() + " (" + $("#date9").val() + ") ",
-                $("#location10").val() + " (" + $("#date10").val() + ") "
+                $("#location1").val() + " (" + $("#date1").val() + ")",
+                $("#location2").val() + " (" + $("#date2").val() + ")",
+                $("#location3").val() + " (" + $("#date3").val() + ")",
+                $("#location4").val() + " (" + $("#date4").val() + ")",
+                $("#location5").val() + " (" + $("#date5").val() + ")",
+                $("#location6").val() + " (" + $("#date6").val() + ")",
+                $("#location7").val() + " (" + $("#date7").val() + ")",
+                $("#location8").val() + " (" + $("#date8").val() + ")",
+                $("#location9").val() + " (" + $("#date9").val() + ")",
+                $("#location10").val() + " (" + $("#date10").val() + ")"
             ];
 
             contacts = contacts.join(", ");
+            contacts = contacts.replace(/\,\s\s\(\)/gi, "");
+
+            console.log(contacts);
 
             let password = $("#auto-password").text();
 
