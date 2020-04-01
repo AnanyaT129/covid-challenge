@@ -640,8 +640,14 @@
                         }
 
                         let contactsAry = [];
-                        contactsAry = doc.data().contacts.split(',');
+                        contactsAry = doc.data().contacts.split(', ');
 
+                        for (let i = 1; i < contactsAry.length + 1; i++) {
+                            let dateId = "date" + i;
+                            let locationId = "location" + i;
+                            document.getElementById(dateId).value = contactsAry[i - 1].substring(contactsAry[i - 1].length - 11, contactsAry[i - 1].length - 1);
+                            document.getElementById(locationId).value = contactsAry[i - 1].substring(0, contactsAry[i - 1].length - 13);
+                        }
                     }
                 })
             });
@@ -664,8 +670,168 @@
         }
 
         function updateInfo() {
-            // Update personal information
+            let firstName = $("#firstName").val();
+            let lastName = $("#lastName").val();
+            let emailAddress = $("#emailAddress").val();
+            let dateOfBirth = $("#dateOfBirth").val();
+            let phoneNumber = $("#phoneNumber").val();
+            let homeAddress = $("#homeAddress1").val() + ", " + $("#homeAddress2").val();
+            let sex = $("input[name='sex']:checked").val();
+            let ethnicity = $("input[name='ethnicity']:checked").val();
+            let race = [];
+
+            $.each($("input[name='race']:checked"), function () {
+                race.push($(this).val());
+            });
+
+            if ($("#other-race").val() !== '') {
+                let string = '{' + $("#other-race").val() + '}';
+                race.push(string);
+            }
+
+            race = race.join(", ");
+
+            let healthcareWorker = $("input[name='worker']:checked").val();
+            let healthcareChina = $("input[name='china']:checked").val();
+            let onsetDate = $("#onsetDate").val();
+            let resolutionDate = $("#resolutionDate").val();
+            let symptoms = [];
+
+            $.each($("input[name='symptoms']:checked"), function () {
+                symptoms.push($(this).val());
+            });
+
+            if ($("#other-symptom").val() !== '') {
+                let string = '{' + $("#other-symptom").val() + '}';
+                symptoms.push(string);
+            }
+
+            symptoms = symptoms.join(", ");
+
+            let existingConditions = [];
+
+            $.each($("input[name='existing']:checked"), function () {
+                if ($(this).val() == "Neurologic, neurodevelopmental, and/or intellectual disability") {
+                    let string = '{' + $(this).val() + " (" + $("#other-disability").val() + ")" + "}";
+                    existingConditions.push(string);
+                } else if ($(this).val() == "Other chronic diseases") {
+                    let string = '{' + $(this).val() + " (" + $("#other-chronic").val() + ")" + "}";
+                    existingConditions.push(string);
+                } else {
+                    existingConditions.push($(this).val());
+                }
+            });
+
+            if ($("#other-condition").val() !== '') {
+                let string = '{' + $("#other-condition").val() + '}';
+                existingConditions.push(string);
+            }
+
+            existingConditions = existingConditions.join(", ");
+
+            let exposures = [];
+
+            $.each($("input[name='exposures']:checked"), function () {
+                exposures.push($(this).val());
+            });
+
+            if ($("#other-exposure").val() !== '') {
+                let string = '{' + $("#other-exposure").val() + '}';
+                exposures.push(string);
+            }
+
+            exposures = exposures.join(", ");
+
+            let contacts = [
+                $("#location1").val() + " (" + $("#date1").val() + ")",
+                $("#location2").val() + " (" + $("#date2").val() + ")",
+                $("#location3").val() + " (" + $("#date3").val() + ")",
+                $("#location4").val() + " (" + $("#date4").val() + ")",
+                $("#location5").val() + " (" + $("#date5").val() + ")",
+                $("#location6").val() + " (" + $("#date6").val() + ")",
+                $("#location7").val() + " (" + $("#date7").val() + ")",
+                $("#location8").val() + " (" + $("#date8").val() + ")",
+                $("#location9").val() + " (" + $("#date9").val() + ")",
+                $("#location10").val() + " (" + $("#date10").val() + ")"
+            ];
+
+            contacts = contacts.join(", ");
+            contacts = contacts.replace(/\,\s\s\(\)/gi, "");
+
+            console.log(contacts);
+
+            let password = $("#auto-password").text();
+
+            let guardianFirstName = $("#guardianFirstName").val();
+            let guardianLastName = $("#guardianLastName").val();
+            let guardianPhoneNumber = $("#guardianPhoneNumber").val();
+            let guardianEmailAddress = $("#guardianEmailAddress").val();
+            let guardianAddress = $("#guardianAddressLine1").val() + ", " + $("#guardianAddressLine2").val();
+
+            if ($('.parent-info').css('display') == 'table-row') {
+                db.collection("users").get().then(function (querySnapshot) {
+                    var i = 1;
+                    querySnapshot.forEach(function (doc) {
+                        if (doc.id === Cookies.get("docId")) {
+                            db.collection("users").doc(doc.id).update({
+                                patientType: 'Child',
+                                firstName: firstName,
+                                lastName: lastName,
+                                emailAddress: emailAddress,
+                                dateOfBirth: dateOfBirth,
+                                phoneNumber: phoneNumber,
+                                homeAddress: homeAddress,
+                                sex: sex,
+                                ethnicity: ethnicity,
+                                race: race,
+                                healthcareWorker: healthcareWorker,
+                                healthcareChina: healthcareChina,
+                                onsetDate: onsetDate,
+                                resolutionDate: resolutionDate,
+                                symptoms: symptoms,
+                                existingConditions: existingConditions,
+                                exposures: exposures,
+                                contacts: contacts,
+                                guardianFirstName: guardianFirstName,
+                                guardianLastName: guardianLastName,
+                                guardianPhoneNumber: guardianPhoneNumber,
+                                guardianEmailAddress: guardianEmailAddress,
+                                guardianAddress: guardianAddress
+                            })
+                        }
+                    })
+                });
+            } else {
+                db.collection("users").get().then(function (querySnapshot) {
+                    var i = 1;
+                    querySnapshot.forEach(function (doc) {
+                        if (doc.id === Cookies.get("docId")) {
+                            db.collection("users").doc(doc.id).update({
+                                patientType: 'Adult',
+                                firstName: firstName,
+                                lastName: lastName,
+                                emailAddress: emailAddress,
+                                dateOfBirth: dateOfBirth,
+                                phoneNumber: phoneNumber,
+                                homeAddress: homeAddress,
+                                sex: sex,
+                                ethnicity: ethnicity,
+                                race: race,
+                                healthcareWorker: healthcareWorker,
+                                healthcareChina: healthcareChina,
+                                onsetDate: onsetDate,
+                                resolutionDate: resolutionDate,
+                                symptoms: symptoms,
+                                existingConditions: existingConditions,
+                                exposures: exposures,
+                                contacts: contacts
+                            })
+                        }
+                    })
+                });
+            }
         }
+
 
         function checkAge(dateOfBirth) {
             let age = new Date(dateOfBirth);
