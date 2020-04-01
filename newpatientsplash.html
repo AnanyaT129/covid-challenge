@@ -41,32 +41,33 @@
             <tr>
                 <td class='patient-table-left'>First name</td>
                 <td>
-                    <input class="patient-input" placeholder="John"></input>
+                    <input id="firstName" type="text" class="patient-input" placeholder="John"></input>
                 </td>
             </tr>
             <tr>
                 <td class='patient-table-left'>Last name</td>
                 <td>
-                    <input class="patient-input" placeholder="Doe"> </input>
+                    <input id="lastName" type="text" class="patient-input" placeholder="Doe"> </input>
                 </td>
             </tr>
             <tr>
                 <td class='patient-table-left'>Email address</td>
                 <td>
-                    <input class="patient-input" type="email" placeholder="person@example.com"></input>
+                    <input id="emailAddress" class="patient-input" type="email"
+                        placeholder="person@example.com"></input>
                 </td>
             </tr>
             <tr>
                 <td class='patient-table-left'>Date of birth</td>
                 <td>
-                    <input class="patient-input" type="date" placeholder="03/31/1993"
+                    <input id="dateOfBirth" class="patient-input" type="date" placeholder="03/31/1993"
                         pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" onchange="checkAge(this.value)" required></input>
                 </td>
             </tr>
             <tr>
                 <td class='patient-table-left'>Phone number</td>
                 <td>
-                    <input class="patient-input" type="tel" placeholder="(012) 345-6789"
+                    <input id="phoneNumber" class="patient-input" type="tel" placeholder="(012) 345-6789"
                         pattern="([0-9]{3}) [0-9]{3}-[0-9]{4}" required></input>
                 </td>
             </tr>
@@ -74,8 +75,10 @@
             <tr>
                 <td class='patient-table-left'>Home address</td>
                 <td>
-                    <input class="patient-input-address" type="text" placeholder="1 Neverending Road"></input>
-                    <input class="patient-input-address" type="text" placeholder="Lancaster, PA 17601"></input>
+                    <input id="homeAddress1" class="patient-input-address" type="text"
+                        placeholder="1 Neverending Road"></input>
+                    <input id="homeAddress2" class="patient-input-address" type="text"
+                        placeholder="Lancaster, PA 17601"></input>
                 </td>
             </tr>
 
@@ -83,13 +86,13 @@
                 <td class='patient-table-left'>Sex</td>
                 <td>
                     <label>
-                        <input class="patient-input" type="radio" name="sex"></input> Male
+                        <input class="patient-input" type="radio" name="sex" value="Male"></input> Male
                     </label>
                     <label>
-                        <input class="patient-input" type="radio" name="sex"></input> Female
+                        <input class="patient-input" type="radio" name="sex" value="Female"></input> Female
                     </label>
                     <label>
-                        <input class="patient-input" type="radio" name="sex"></input> Other
+                        <input class="patient-input" type="radio" name="sex" value="Other"></input> Other
                     </label>
 
                 </td>
@@ -98,25 +101,26 @@
             <tr class="parent-info">
                 <td class='patient-table-left'>Primary guardian's first name</td>
                 <td>
-                    <input class="patient-input" placeholder="John"></input>
+                    <input id="guardianFirstName" class="patient-input" placeholder="John"></input>
                 </td>
             </tr>
             <tr class="parent-info">
                 <td class='patient-table-left'>Primary guardian's last name</td>
                 <td>
-                    <input class="patient-input" placeholder="Doe"> </input>
+                    <input id="guardianLastName" class="patient-input" placeholder="Doe"> </input>
                 </td>
             </tr>
             <tr class="parent-info">
                 <td class='patient-table-left'>Primary guardian's email address</td>
                 <td>
-                    <input class="patient-input" type="email" placeholder="person@example.com"></input>
+                    <input id="guardianEmailAddress" class="patient-input" type="email"
+                        placeholder="person@example.com"></input>
                 </td>
             </tr>
             <tr class="parent-info">
                 <td class='patient-table-left'>Primary guardian's phone number</td>
                 <td>
-                    <input class="patient-input" type="tel" placeholder="(012) 345-6789"
+                    <input id="guardianPhoneNumber" class="patient-input" type="tel" placeholder="(012) 345-6789"
                         pattern="([0-9]{3}) [0-9]{3}-[0-9]{4}" required></input>
                 </td>
             </tr>
@@ -124,22 +128,27 @@
             <tr class="parent-info">
                 <td class='patient-table-left'>Primary guardian's home address</td>
                 <td>
-                    <input class="patient-input-address" type="text" placeholder="1 Neverending Road"></input>
-                    <input class="patient-input-address" type="text" placeholder="Lancaster, PA 17601"></input>
+                    <input id="guardianAddressLine1" class="patient-input-address" type="text"
+                        placeholder="1 Neverending Road"></input>
+                    <input id="guardianAddressLine2" class="patient-input-address" type="text"
+                        placeholder="Lancaster, PA 17601"></input>
                 </td>
             </tr>
 
             <tr>
-                <td class='patient-table-left'>Ethnicity</td>
+                <td id="ethnicity" class='patient-table-left'>Ethnicity</td>
                 <td>
                     <label>
-                        <input class="patient-input" type="radio" name="ethnicity"></input> Hispanic/Latino
+                        <input class="patient-input" type="radio" name="ethnicity" value="Hispanic/Latino"></input>
+                        Hispanic/Latino
                     </label>
                     <label>
-                        <input class="patient-input" type="radio" name="ethnicity"></input> Non Hispanic/Latino
+                        <input class="patient-input" type="radio" name="ethnicity" value="Non Hispanic/Latino"></input>
+                        Non Hispanic/Latino
                     </label>
                     <label>
-                        <input class="patient-input" type="radio" name="ethnicity"></input> Not specified
+                        <input class="patient-input" type="radio" name="ethnicity" value="Not specified"></input> Not
+                        specified
                     </label>
 
                 </td>
@@ -149,24 +158,28 @@
                 <td class='patient-table-left'>Race (check all that apply)</td>
                 <td>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Asian
+                        <input class="patient-input" type="checkbox" name="race" value="Asian"></input> Asian
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Black
+                        <input class="patient-input" type="checkbox" name="race" value="Black"></input> Black
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> White
+                        <input class="patient-input" type="checkbox" name="race" value="White"></input> White
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> American Indian/Alaska Native
+                        <input class="patient-input" type="checkbox" name="race"
+                            value="American Indian/Alaska Native"></input>
+                        American Indian/Alaska Native
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Native Hawaiian/Other Pacific Islander
+                        <input class="patient-input" type="checkbox" name="race"
+                            value="Native Hawaiian/Other Pacific Islander"></input> Native Hawaiian/Other Pacific
+                        Islander
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Unknown
+                        <input class="patient-input" type="checkbox" name="race" value="Unknown"></input> Unknown
                     </label>
-                    Other: <input class="patient-input" type="text" placeholder="..."></input>
+                    Other: <input id="other-race" class="patient-input" type="text" placeholder="..."></input>
                 </td>
             </tr>
 
@@ -174,10 +187,10 @@
                 <td class='patient-table-left'>Are you a healthcare worker in the United States?</td>
                 <td>
                     <label>
-                        <input class="patient-input" type="radio" name="worker"></input> Yes
+                        <input class="patient-input" type="radio" name="worker" value="Yes"></input> Yes
                     </label>
                     <label>
-                        <input class="patient-input" type="radio" name="worker"></input> No
+                        <input class="patient-input" type="radio" name="worker" value="No"></input> No
                     </label>
                 </td>
             </tr>
@@ -187,23 +200,23 @@
                     worker or visitor) in China?</td>
                 <td>
                     <label>
-                        <input class="patient-input" type="radio" name="china"></input> Yes
+                        <input class="patient-input" type="radio" name="china" value="Yes"></input> Yes
                     </label>
                     <label>
-                        <input class="patient-input" type="radio" name="china"></input> No
+                        <input class="patient-input" type="radio" name="china" value="No"></input> No
                     </label>
                 </td>
             </tr>
 
             <tr>
                 <td class='patient-table-left'>If symptomatic, symptom onset date</td>
-                <td><input class="patient-input" type="date" placeholder="03/20/2020"
+                <td><input id="onsetDate" class="patient-input" type="date" placeholder="03/20/2020"
                         pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input></td>
             </tr>
 
             <tr>
                 <td class='patient-table-left'>If symptomatic, date of symptom resolution</td>
-                <td><input class="patient-input" type="date" placeholder="03/20/2020"
+                <td><input id="resolutionDate" class="patient-input" type="date" placeholder="03/20/2020"
                         pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input></td>
             </tr>
 
@@ -211,47 +224,58 @@
                 <td class='patient-table-left'>Symptoms</td>
                 <td>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Fever > 100.4F
+                        <input class="patient-input" type="checkbox" name="symptoms" value="Fever > 100.4F"></input>
+                        Fever > 100.4F
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Subjective fever (felt
-                        feverish)
+                        <input class="patient-input" type="checkbox" name="symptoms"
+                            value="Subjective fever (felt feverish)"></input> Subjective fever (felt feverish)
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Chills
+                        <input class="patient-input" type="checkbox" name="symptoms" value="Chills"></input> Chills
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Muscle aches (myalgia)
+                        <input class="patient-input" type="checkbox" name="symptoms"
+                            value="Muscle aches (myalgia)"></input> Muscle
+                        aches (myalgia)
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Runny nose (rhinorrhea)
+                        <input class="patient-input" type="checkbox" name="symptoms"
+                            value="Runny nose (rhinorrhea)"></input> Runny nose
+                        (rhinorrhea)
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Sore throat
+                        <input class="patient-input" type="checkbox" name="symptoms" value="Sore throat"></input> Sore
+                        throat
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Cough (new or worsening chronic
+                        <input class="patient-input" type="checkbox" name="symptoms"
+                            value="Cough (new or worsening chronic cough)"></input> Cough (new or worsening chronic
                         cough)
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Shortness of breath
-                        (dyspnea)
+                        <input class="patient-input" type="checkbox" name="symptoms"
+                            value="Shortness of breath (dyspnea)"></input> Shortness of breath (dyspnea)
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Nausea or vomiting
+                        <input class="patient-input" type="checkbox" name="symptoms" value="Nausea or vomiting"></input>
+                        Nausea or
+                        vomiting
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Headache
+                        <input class="patient-input" type="checkbox" name="symptoms" value="Headache"></input> Headache
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Abdominal pain
+                        <input class="patient-input" type="checkbox" name="symptoms" value="Abdominal pain"></input>
+                        Abdominal pain
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Diarrhea (≥3 loose/looser than
-                        normal stools/24hr
-                        period)
+                        <input class="patient-input" type="checkbox" name="symptoms"
+                            value="Diarrhea (≥3 loose/looser than normal stools/24hr period)"></input> Diarrhea (≥3
+                        loose/looser than
+                        normal stools/24hr period)
                     </label>
-                    Other: <input class="patient-input" type="text" placeholder="..."></input>
+                    Other: <input id="other-symptom" class="patient-input" type="text" placeholder="..."></input>
                 </td>
             </tr>
 
@@ -259,44 +283,63 @@
                 <td class='patient-table-left'>Pre-existing conditions</td>
                 <td>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Chronic Lung Disease
+                        <input class="patient-input" type="checkbox"
+                            value="Chronic Lung Disease (asthma/emphysema/COPD)" name="existing"></input> Chronic Lung
+                        Disease
                         (asthma/emphysema/COPD)
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Diabetes Mellitus
+                        <input class="patient-input" type="checkbox" name="existing" value="Diabetes Mellitus"></input>
+                        Diabetes
+                        Mellitus
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Cardiovascular disease
+                        <input class="patient-input" type="checkbox" name="existing"
+                            value="Cardiovascular disease"></input>
+                        Cardiovascular disease
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Chronic Renal diseases
+                        <input class="patient-input" type="checkbox" name="existing"
+                            value="Chronic Renal diseases"></input> Chronic
+                        Renal diseases
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Chronic Liver disease
+                        <input class="patient-input" type="checkbox" name="existing"
+                            value="Chronic Liver disease"></input> Chronic
+                        Liver disease
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Immunocompromised Condition
+                        <input class="patient-input" type="checkbox" name="existing"
+                            value="Immunocompromised Condition"></input>
+                        Immunocompromised Condition
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input>
+                        <input class="patient-input" type="checkbox" name="existing"
+                            value="Neurologic, neurodevelopmental, and/or intellectual disability"></input>
                         Neurologic, neurodevelopmental, and/or intellectual disability
-                        (Please specify: <input class="patient-input" type="text" placeholder="..."></input>)
-                    </label>
-                    <label>
-                        <input class="patient-input" type="checkbox"></input>
-                        Other chronic diseases (Please specify: <input class="patient-input" type="text"
+                        (Please specify: <input id="other-disability" class="patient-input" type="text"
                             placeholder="..."></input>)
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> If female, currently pregnant
+                        <input class="patient-input" type="checkbox" name="existing"
+                            value="Other chronic diseases"></input>
+                        Other chronic diseases (Please specify: <input id="other-chronic" class="patient-input"
+                            type="text" placeholder="..."></input>)
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Current smoker
+                        <input class="patient-input" type="checkbox" name="existing"
+                            value="If female, currently pregnant"></input> If
+                        female, currently pregnant
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Former smoker
+                        <input class="patient-input" type="checkbox" name="existing" value="Current smoker"></input>
+                        Current smoker
                     </label>
-                    Other: <input class="patient-input" type="text" placeholder="..."></input>
+                    <label>
+                        <input class="patient-input" type="checkbox" name="existing" value="Former smoker"></input>
+                        Former smoker
+                    </label>
+                    Other: <input id="other-condition" class="patient-input" type="text" placeholder="..."></input>
                 </td>
             </tr>
 
@@ -305,45 +348,60 @@
                     exposures (check all that apply)?</td>
                 <td>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Travel to Wuhan
+                        <input class="patient-input" type="checkbox" name="exposures" value="Travel to Wuhan"></input>
+                        Travel to Wuhan
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Travel to Hubei
+                        <input class="patient-input" type="checkbox" name="exposures" value="Travel to Hubei"></input>
+                        Travel to Hubei
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Travel to mainland China
+                        <input class="patient-input" type="checkbox" name="exposures"
+                            value="Travel to mainland China"></input> Travel to
+                        mainland China
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Community contact with another
+                        <input class="patient-input" type="checkbox" name="exposures"
+                            value="Community contact with another lab-confirmed COVID-19 case-patient"></input>
+                        Community contact with another
                         lab-confirmed COVID-19 case-patient
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Animal exposure
+                        <input class="patient-input" type="checkbox" name="exposures"
+                            value="Exposure to an infected animal"></input>
+                        Exposure to an infected animal
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Exposure to a cluster of patients with
-                        severe acute lower respiratory distress of unknown etiology
+                        <input class="patient-input" type="checkbox" name="exposures"
+                            value="Exposure to a cluster of patients with severe acute lower respiratory distress of unknown etiology"></input>
+                        Exposure to a
+                        cluster of patients
+                        with severe acute lower respiratory distress of unknown etiology
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Any healthcare contact with another
-                        lab-confirmed COVID-19 case-patient (Patient)
+                        <input class="patient-input" type="checkbox" name="exposures"
+                            value="Any healthcare contact with another lab-confirmed COVID-19 case-patient (Patient)"></input>
+                        Any healthcare contact with another lab-confirmed COVID-19 case-patient (Patient)
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Any healthcare contact with another
-                        lab-confirmed COVID-19 case-patient (Visitor)
+                        <input class="patient-input" type="checkbox" name="exposures"
+                            value="Any healthcare contact with another lab-confirmed COVID-19 case-patient (Visitor)"></input>
+                        Any healthcare contact with another lab-confirmed COVID-19 case-patient (Visitor)
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Any healthcare contact with another
-                        lab-confirmed COVID-19 case-patient (HCW)
+                        <input class="patient-input" type="checkbox" name="exposures"
+                            value="Any healthcare contact with another lab-confirmed COVID-19 case-patient (HCW)"></input>
+                        Any healthcare contact with another lab-confirmed COVID-19 case-patient (HCW)
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Household contact with another
-                        lab-confirmed COVID-19 case patient
+                        <input class="patient-input" type="checkbox" name="exposures"
+                            value="Household contact with another lab-confirmed COVID-19 case patient"></input>
+                        Household contact with another lab-confirmed COVID-19 case patient
                     </label>
                     <label>
-                        <input class="patient-input" type="checkbox"></input> Unknown
+                        <input class="patient-input" type="checkbox" name="exposures" value="Unknown"></input> Unknown
                     </label>
-                    Other: <input class="patient-input" type="text" placeholder="..."></input>
+                    Other: <input id="other-exposure" class="patient-input" type="text" placeholder="..."></input>
                 </td>
             </tr>
 
@@ -351,45 +409,43 @@
                 <td class='patient-table-left'>Please list any public places (and the dates you were there) that you
                     have been in over the past 14 days.</td>
                 <td>
-                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                    <input id="date1" class="patient-input" type="date" placeholder="03/20/2020"
                         pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
-                    <input class="patient-input-address" type="text" placeholder="Location one"></input>
-                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                    <input id="location1" class="patient-input-address" type="text" placeholder="Location one"></input>
+                    <input id="date2" class="patient-input" type="date" placeholder="03/20/2020"
                         pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
-                    <input class="patient-input-address" type="text" placeholder="Location two"></input>
-                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                    <input id="location2" class="patient-input-address" type="text" placeholder="Location two"></input>
+                    <input id="date3" class="patient-input" type="date" placeholder="03/20/2020"
                         pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
-                    <input class="patient-input-address" type="text" placeholder="Location three"></input>
-                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                    <input id="location3" class="patient-input-address" type="text"
+                        placeholder="Location three"></input>
+                    <input id="date4" class="patient-input" type="date" placeholder="03/20/2020"
                         pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
-                    <input class="patient-input-address" type="text" placeholder="Location four"></input>
-                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                    <input id="location4" class="patient-input-address" type="text" placeholder="Location four"></input>
+                    <input id="date5" class="patient-input" type="date" placeholder="03/20/2020"
                         pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
-                    <input class="patient-input-address" type="text" placeholder="Location five"></input>
-                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                    <input id="location5" class="patient-input-address" type="text" placeholder="Location five"></input>
+                    <input id="date6" class="patient-input" type="date" placeholder="03/20/2020"
                         pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
-                    <input class="patient-input-address" type="text" placeholder="Location six"></input>
-                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                    <input id="location6" class="patient-input-address" type="text" placeholder="Location six"></input>
+                    <input id="date7" class="patient-input" type="date" placeholder="03/20/2020"
                         pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
-                    <input class="patient-input-address" type="text" placeholder="Location seven"></input>
-                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                    <input id="location7" class="patient-input-address" type="text"
+                        placeholder="Location seven"></input>
+                    <input id="date8" class="patient-input" type="date" placeholder="03/20/2020"
                         pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
-                    <input class="patient-input-address" type="text" placeholder="Location eight"></input>
-                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                    <input id="location8" class="patient-input-address" type="text"
+                        placeholder="Location eight"></input>
+                    <input id="date9" class="patient-input" type="date" placeholder="03/20/2020"
                         pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
-                    <input class="patient-input-address" type="text" placeholder="Location nine"></input>
-                    <input class="patient-input" type="date" placeholder="03/20/2020"
+                    <input id="location9" class="patient-input-address" type="text" placeholder="Location nine"></input>
+                    <input id="date10" class="patient-input" type="date" placeholder="03/20/2020"
                         pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required></input>
-                    <input class="patient-input-address" type="text" placeholder="Location ten"></input>
+                    <input id="location10" class="patient-input-address" type="text" placeholder="Location ten"></input>
                 </td>
             </tr>
         </table>
 
-        <!--
-            To add:
-                Last 4 digits of SSN
-                Autogenerating password
-        -->
         <p id="info-password">This is your password. Please write this down, as you will need it to log in to your
             account.</p>
         <p id="auto-password"></p>
@@ -404,11 +460,162 @@
 
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
+
     <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyDD7IM5QAOF5y8PCHcmYg7d5ALAOAgcF2g",
+            authDomain: "covid-19-challenge-63dc9.firebaseapp.com",
+            databaseURL: "https://covid-19-challenge-63dc9.firebaseio.com",
+            projectId: "covid-19-challenge-63dc9",
+            storageBucket: "covid-19-challenge-63dc9.appspot.com",
+            messagingSenderId: "16503968884",
+            appId: "1:16503968884:web:0913620e1a13ecddecad21",
+            measurementId: "G-X6ZB7JV3ZG"
+        };
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
         function register() {
-            /*
-            Should evaluate patient risk and submit their profile
-            */
+            let firstName = $("#firstName").val();
+            let lastName = $("#lastName").val();
+            let emailAddress = $("#emailAddress").val();
+            let dateOfBirth = $("#dateOfBirth").val();
+            let phoneNumber = $("#phoneNumber").val();
+            let homeAddress = $("#homeAddress1").val() + ", " + $("#homeAddress2").val();
+            let sex = $("input[name='sex']:checked").val();
+            let ethnicity = $("input[name='ethnicity']:checked").val();
+            let race = [$("#other-race").val()];
+
+            $.each($("input[name='race']:checked"), function () {
+                race.push($(this).val());
+            });
+
+            race = race.join(", ");
+
+            let healthcareWorker = $("input[name='worker']:checked").val();
+            let healthcareChina = $("input[name='china']:checked").val();
+            let onsetDate = $("#onsetDate").val();
+            let resolutionDate = $("#resolutionDate").val();
+            let symptoms = [$("#other-symptom").val()];
+
+            $.each($("input[name='symptoms']:checked"), function () {
+                symptoms.push($(this).val());
+            });
+
+            symptoms = symptoms.join(", ");
+
+            let existingConditions = [$("#other-condition").val()];
+
+            $.each($("input[name='existing']:checked"), function () {
+                existingConditions.push($(this).val());
+
+                if ($(this).val() == "Neurologic, neurodevelopmental, and/or intellectual disability") {
+                    existingConditions.push($("#other-disability").val());
+                }
+
+                if ($(this).val() == "Other chronic diseases") {
+                    existingConditions.push($("#other-chronic").val());
+                }
+            });
+
+            existingConditions = existingConditions.join(", ");
+
+
+            let exposures = [$("#other-exposure").val()];
+
+            $.each($("input[name='exposures']:checked"), function () {
+                exposures.push($(this).val());
+            });
+
+            exposures = exposures.join(", ");
+
+            let contacts = [
+                $("#location1").val() + " (" + $("#date1").val() + ") ",
+                $("#location2").val() + " (" + $("#date2").val() + ") ",
+                $("#location3").val() + " (" + $("#date3").val() + ") ",
+                $("#location4").val() + " (" + $("#date4").val() + ") ",
+                $("#location5").val() + " (" + $("#date5").val() + ") ",
+                $("#location6").val() + " (" + $("#date6").val() + ") ",
+                $("#location7").val() + " (" + $("#date7").val() + ") ",
+                $("#location8").val() + " (" + $("#date8").val() + ") ",
+                $("#location9").val() + " (" + $("#date9").val() + ") ",
+                $("#location10").val() + " (" + $("#date10").val() + ") "
+            ];
+
+            contacts = contacts.join(", ");
+
+            let password = $("#auto-password").text();
+
+            let guardianFirstName = $("#guardianFirstName").val();
+            let guardianLastName = $("#guardianLastName").val();
+            let guardianPhoneNumber = $("#guardianPhoneNumber").val();
+            let guardianEmailAddress = $("#guardianEmailAddress").val();
+            let guardianAddress = $("#guardianAddressLine1").val() + ", " + $("#guardianAddressLine2").val();
+
+            if ($('.parent-info').css('display') == 'table-row') {
+                var db = firebase.firestore();
+                db.collection("users").add({
+                    patientType: 'Child',
+                    firstName: firstName,
+                    lastName: lastName,
+                    emailAddress: emailAddress,
+                    dateOfBirth: dateOfBirth,
+                    phoneNumber: phoneNumber,
+                    homeAddress: homeAddress,
+                    sex: sex,
+                    ethnicity: ethnicity,
+                    race: race,
+                    healthcareWorker: healthcareWorker,
+                    healthcareChina: healthcareChina,
+                    onsetDate: onsetDate,
+                    resolutionDate: resolutionDate,
+                    symptoms: symptoms,
+                    existingConditions: existingConditions,
+                    exposures: exposures,
+                    contacts: contacts,
+                    guardianFirstName: guardianFirstName,
+                    guardianLastName: guardianLastName,
+                    guardianPhoneNumber: guardianPhoneNumber,
+                    guardianEmailAddress: guardianEmailAddress,
+                    guardianAddress: guardianAddress,
+                    password: password
+                }).then(function (docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                }).catch(function (error) {
+                    console.error("Error adding document: ", error);
+                });
+            } else {
+                var db = firebase.firestore();
+                db.collection("users").add({
+                    patientType: 'Adult',
+                    firstName: firstName,
+                    lastName: lastName,
+                    emailAddress: emailAddress,
+                    dateOfBirth: dateOfBirth,
+                    phoneNumber: phoneNumber,
+                    homeAddress: homeAddress,
+                    sex: sex,
+                    ethnicity: ethnicity,
+                    race: race,
+                    healthcareWorker: healthcareWorker,
+                    healthcareChina: healthcareChina,
+                    onsetDate: onsetDate,
+                    resolutionDate: resolutionDate,
+                    symptoms: symptoms,
+                    existingConditions: existingConditions,
+                    exposures: exposures,
+                    contacts: contacts,
+                    password: password
+                }).then(function (docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                }).catch(function (error) {
+                    console.error("Error adding document: ", error);
+                });
+            }
         }
 
         function checkAge(dateOfBirth) {
