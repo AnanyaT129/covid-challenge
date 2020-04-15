@@ -76,6 +76,27 @@ body {
     color: #0066ff;
 }
 
+.edit-button {
+    background-image: linear-gradient(to bottom right, #3399ff, #0066ff);
+    height: 50px;
+    border-radius: 5px;
+    border: 2px solid white;
+    font-size: 20px;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+}
+
+.edit-button:hover {
+    border: 2px solid #3399ff;
+    background-color: white;
+    background-image: none;
+    color: #0066ff;
+}
+
 .professional-button {
     background-image: linear-gradient(to bottom right, #00cc00, #339933);
     width: 250px;
@@ -124,6 +145,7 @@ table {
 
 #medical-table {
     width: 100vw;
+    padding-top: 2vh;
     padding-left: 36px;
     padding-right: 36px;
 }
