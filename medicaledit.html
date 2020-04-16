@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Sen:400,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <title>Covid-19 Challenge</title>
+</head>
+
+<body>
+    <div class="information-box">
+        <h1 id="name" class="information-header">Add results for</h1>
+        <p id="age" class="information-paragraph"></p>
+        <p id="onsetDate" class="information-paragraph"></p>
+        <p id="resolutionDate" class="information-paragraph"></p>
+        <p id="symptoms" class=" information-paragraph">Symptoms: </p>
+        <p id="conditions" class="information-paragraph">Pre-existing Conditions: </p>
+        <p id="exposures" class="information-paragraph">Exposures: </p>
+        <p id="healthcareWorker" class="information-paragraph">Healthcare worker: </p>
+        <p id="healthcareChina" class="information-paragraph">Healthcare facility in china: </p>
+    </div>
+
+    <div class="action-box">
+        <div id="appointments-box">
+            <h1 class="portal-header">Appointments</h1>
+            <table id="appointments-table">
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Testing Center</th>
+                </tr>
+            </table>
+            <center>
+                <button class="patient-button" onclick="updateAppointments()">Update appointments</button><br>
+            </center>
+        </div>
+        <div id="results-box">
+            <h1 class="portal-header">Test results</h1>
+            <table id="results-table">
+                <tr>
+                    <th>Date</th>
+                    <th>Testing Center</th>
+                    <th>Result</th>
+                </tr>
+            </table>
+            <center>
+                <button class="patient-button" onclick="updateResults()">Update results</button><br>
+            </center>
+        </div>
+        <div id="risk-box">
+            <h1 class="portal-header">Update risk</h1>
+            <table id="registration-table">
+                <tr>
+                    <td class='patient-table-left'>Risk level</td>
+                    <td>
+                        <label>
+                            <input class="patient-input" type="radio" name="risk" value="Low"></input> Low
+                        </label>
+                        <label>
+                            <input class="patient-input" type="radio" name="risk" value="Medium"></input> Medium
+                        </label>
+                        <label>
+                            <input class="patient-input" type="radio" name="risk" value="High"></input> High
+                        </label>
+                        <label>
+                            <input class="patient-input" type="radio" name="risk" value="Priority"></input> Priority
+                        </label>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class='patient-table-left'>Reasoning</td>
+                    <td>
+                        <input id="reasoning" class="patient-input" placeholder="..."></input>
+                    </td>
+                </tr>
+            </table>
+            <center>
+                <button class="patient-button" onclick="updateRisk()">Update risk</button><br>
+            </center>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
+
+    <script>
+        let didApptLoad = false;
+        let didResLoad = false;
+
+        var firebaseConfig = {
+            apiKey: "AIzaSyDD7IM5QAOF5y8PCHcmYg7d5ALAOAgcF2g",
+            authDomain: "covid-19-challenge-63dc9.firebaseapp.com",
+            databaseURL: "https://covid-19-challenge-63dc9.firebaseio.com",
+            projectId: "covid-19-challenge-63dc9",
+            storageBucket: "covid-19-challenge-63dc9.appspot.com",
+            messagingSenderId: "16503968884",
+            appId: "1:16503968884:web:0913620e1a13ecddecad21",
+            measurementId: "G-X6ZB7JV3ZG"
+        };
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        let db = firebase.firestore();
+
+        $(document).ready(function () {
+            db.collection("users").get().then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    if (doc.id === Cookies.get("docId")) {
+                        console.log("in!");
+                        document.getElementById("name").innerHTML = 'Edit status for ' + doc.data().firstName + ' ' + doc.data().lastName;
+
+                        let birthday = new Date(doc.data().dateOfBirth);
+                        var ageDifMs = Date.now() - birthday.getTime();
+                        var ageDate = new Date(ageDifMs); // miliseconds from epoch
+                        let age = Math.abs(ageDate.getUTCFullYear() - 1970);
+
+                        document.getElementById("age").innerHTML = '<b>Age:</b> ' + age + ' years old';
+                        document.getElementById("onsetDate").innerHTML = '<b>Symptom onset date:</b> ' + doc.data().onsetDate;
+
+                        if (doc.data().resolutionDate !== '') {
+                            document.getElementById("resolutionDate").innerHTML = '<b>Symptom resolution date:</b> ' + doc.data().resolutionDate;
+                        }
+
+                        let symptomsList = doc.data().symptoms.replace('{', '');
+                        symptomsList = symptomsList.replace('}', '');
+                        symptomsList = symptomsList.split(',');
+
+                        let symptomsStr = '<b>Symptoms:</b><ul>';
+
+                        for (let i = 0; i < symptomsList.length; i++) {
+                            symptomsStr += '<li>' + symptomsList[i] + '</li>';
+                            if (i == symptomsList.length - 1) {
+                                symptomsStr += "</ul>";
+                            }
+                        }
+
+                        document.getElementById("symptoms").innerHTML = symptomsStr;
+
+                        let conditionsAry = doc.data().existingConditions;
+                        let conditionsStr = '<b>Pre-existing Conditions:</b><ul>';
+
+                        if (conditionsAry.includes('Neurologic, neurodevelopmental, and/or intellectual disability')) {
+                            let str = conditionsAry.substring(conditionsAry.indexOf('Neurologic, neurodevelopmental, and/or intellectual disability'), conditionsAry.indexOf('}'));
+                            let delStr = '{' + str + '}';
+                            conditionsAry = conditionsAry.replace(delStr, '');
+                            conditionsStr += "<li>" + str + '</li>';
+                        }
+
+                        if (conditionsAry.includes('Other chronic diseases')) {
+                            let str = conditionsAry.substring(conditionsAry.indexOf('Other chronic diseases'), conditionsAry.indexOf('}'));
+                            let delStr = '{' + str + '}';
+                            conditionsAry = conditionsAry.replace(delStr, '');
+                            conditionsStr += "<li>" + str + '</li>';
+                        }
+
+                        if (conditionsAry.includes('{')) {
+                            let str = conditionsAry.substring(conditionsAry.indexOf('{'), conditionsAry.indexOf('}'));
+                            let delStr = str + '}';
+                            conditionsAry = conditionsAry.replace(delStr, '');
+                            str = str.split(',');
+
+                            for (let i = 0; i < str.length; i++) {
+                                conditionsStr += "<li>" + (str[i].replace('{', '')).replace('}', '') + '</li>';
+                            }
+                        }
+
+                        conditionsAry = conditionsAry.split(',');
+
+                        for (let i = 0; i < conditionsAry.length; i++) {
+                            if (conditionsAry[i] !== ' ') {
+                                conditionsStr += "<li>" + conditionsAry[i] + '</li>';
+                            }
+                            if (i == conditionsAry.length - 1) {
+                                conditionsStr += "</ul>";
+                            }
+                        }
+
+                        document.getElementById("conditions").innerHTML = conditionsStr;
+
+                        let exposuresAry = doc.data().exposures;
+                        console.log(exposuresAry);
+                        let exposuresStr = '<b>Exposures:</b><ul>'
+
+                        if (exposuresAry.includes('{')) {
+                            let str = exposuresAry.substring(exposuresAry.indexOf('{'), exposuresAry.indexOf('}'));
+                            let delStr = str + '}';
+                            exposuresAry = exposuresAry.replace(delStr, '');
+                            str = str.split(',');
+
+                            for (let i = 0; i < str.length; i++) {
+                                exposuresStr += "<li>" + (str[i].replace('{', '')).replace('}', '') + '</li>';
+                            }
+                        }
+
+                        exposuresAry = exposuresAry.split(',');
+
+                        for (let i = 0; i < exposuresAry.length; i++) {
+                            if (exposuresAry[i] !== ' ') {
+                                exposuresStr += "<li>" + exposuresAry[i] + '</li>';
+                            }
+                            if (i == exposuresAry.length - 1) {
+                                exposuresStr += "</ul>";
+                            }
+                        }
+
+                        document.getElementById("exposures").innerHTML = exposuresStr;
+
+                        if (doc.data().healthcareWorker == 'Yes') {
+                            document.getElementById("healthcareWorker").innerHTML = '<b>This patient is a healthcare worker in the United States.</b>';
+                        } else {
+                            document.getElementById("healthcareWorker").innerHTML = 'This patient is not a healthcare worker in the United States.';
+                        }
+
+                        if (doc.data().healthcareChina == 'Yes') {
+                            document.getElementById("healthcareChina").innerHTML = '<b>This patient has a history of being in a healthcare facility (as a patient, worker, or visitor) in China.</b>';
+                        } else {
+                            document.getElementById("healthcareChina").innerHTML = 'This patient does not have a history of being in a healthcare facility (as a patient, worker, or visitor) in China.';
+                        }
+
+                    }
+                })
+            });
+
+            // load appointments
+            db.collection("users").get().then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    if (doc.id === Cookies.get("docId")) {
+                        let table = document.getElementById('appointments-table');
+                        if (doc.data().appointments == '{}') {
+
+                        } else {
+                            let apptAry = doc.data().appointments.split(/\,\s?(?![^\{]*\})/);
+                            for (let i = 0; i < apptAry.length; i++) {
+                                let smallAry = apptAry[i].split(',');
+                                var row = table.insertRow(i + 1);
+                                var cell = row.insertCell(0);
+                                cell.innerHTML = smallAry[0].substring(1);
+
+                                cell = row.insertCell(1);
+                                cell.innerHTML = smallAry[1];
+
+                                cell = row.insertCell(2);
+                                cell.innerHTML = smallAry[2].substring(0, smallAry[2].length - 1);
+                            }
+                        }
+
+                        var row = table.insertRow(table.rows.length);
+                        var cell = row.insertCell(0);
+                        cell.innerHTML = '<input class="doctor-input" id="newApptDate" placeholder="03/20/2020" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"></input>';
+
+                        cell = row.insertCell(1);
+                        cell.innerHTML = '<input class="doctor-input" id="newApptTime" placeholder="HH:MM AM/PM"></input>';
+
+                        cell = row.insertCell(2);
+                        cell.innerHTML = '<input class="doctor-input" id="newApptLoc" placeholder="Testing location"></input>';
+                    }
+                })
+            });
+
+            // load risk
+
+
+            // load results
+            db.collection("users").get().then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    if (doc.id === Cookies.get("docId")) {
+                        let table = document.getElementById('results-table');
+                        if (doc.data().results == '{}') {
+
+                        } else {
+                            let resAry = doc.data().results.split(/\,\s?(?![^\{]*\})/);
+
+                            for (let i = 0; i < resAry.length; i++) {
+                                let smallAry = resAry[i].split(',');
+                                var row = table.insertRow(i + 1);
+                                var cell = row.insertCell(0);
+                                cell.innerHTML = smallAry[0].substring(1);
+
+                                cell = row.insertCell(1);
+                                cell.innerHTML = smallAry[1];
+
+                                cell = row.insertCell(2);
+                                cell.innerHTML = '<b>' + smallAry[2].substring(0, smallAry[2].length - 1) + '</b>';
+                            }
+                        }
+
+                        var row = table.insertRow(table.rows.length);
+                        var cell = row.insertCell(0);
+                        cell.innerHTML = '<input class="doctor-input" id="newResDate" placeholder="03/20/2020" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"></input> ';
+
+                        cell = row.insertCell(1);
+                        cell.innerHTML = '<input class="doctor-input" id="newResLoc" placeholder="Testing location"></input>';
+
+                        cell = row.insertCell(2);
+                        cell.innerHTML = '<input class="doctor-input" id="newResResult" placeholder="Result"></input>';
+                    }
+                })
+            });
+
+            $('#results-box').css('display', 'block');
+            $('#risk-box').css('display', 'block');
+            $('#appointments-box').css('display', 'block');
+
+            if (Cookies.get('task') == 'result') {
+                window.location = 'medicaledit.html#results-box'
+            }
+
+            if (Cookies.get('task') == 'schedule') {
+                window.location = 'medicaledit.html#appointments-box'
+            }
+
+            if (Cookies.get('task') == 'risk') {
+                window.location = 'medicaledit.html#risk-box'
+            }
+        });
+
+        function updateRisk() {
+            db.collection("users").get().then(function (querySnapshot) {
+                var i = 1;
+                querySnapshot.forEach(function (doc) {
+                    if (doc.id === Cookies.get("docId")) {
+                        db.collection("users").doc(doc.id).update({
+                            risk: $("input[name='risk']:checked").val(),
+                            reasoning: $("#reasoning").val()
+                        })
+                    }
+                })
+            });
+
+            alert("Risk level has been updated!");
+        }
+
+        function updateAppointments() {
+            db.collection("users").get().then(function (querySnapshot) {
+                var i = 1;
+                querySnapshot.forEach(function (doc) {
+                    if (doc.id === Cookies.get("docId")) {
+
+                        let currentAppt = doc.data().appointments;
+                        if (currentAppt !== '{}') {
+                            currentAppt += ', {' + $("#newApptDate").val() + ', ' + $("#newApptTime").val() + ', ' + $("#newApptLoc").val() + '}';
+                        } else {
+                            currentAppt = '{' + $("#newApptDate").val() + ', ' + $("#newApptTime").val() + ', ' + $("#newApptLoc").val() + '}';
+                        }
+
+                        db.collection("users").doc(doc.id).update({
+                            appointments: currentAppt,
+                        })
+                    }
+                })
+            });
+            alert("Appointment has been added!");
+
+        }
+
+        function updateResults() {
+            db.collection("users").get().then(function (querySnapshot) {
+                var i = 1;
+                querySnapshot.forEach(function (doc) {
+                    if (doc.id === Cookies.get("docId")) {
+
+                        let currentRes = doc.data().results;
+                        console.log(currentRes);
+
+                        if (currentRes !== '{}') {
+                            currentRes += ', {' + $("#newResDate").val() + ', ' + $("#newResLoc").val() + ', ' + $("#newResResult").val() + '}';
+                        } else {
+                            currentRes = '{' + $("#newResDate").val() + ', ' + $("#newResLoc").val() + ', ' + $("#newResResult").val() + '}';
+                        }
+
+                        db.collection("users").doc(doc.id).update({
+                            results: currentRes,
+                        })
+                    }
+                })
+            });
+            alert("Result has been added!");
+        }
+    </script>
+</body>
+
+</html>

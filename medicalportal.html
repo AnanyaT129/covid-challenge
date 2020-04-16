@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link href="https://fonts.googleapis.com/css?family=Sen:400,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <title>Covid-19 Challenge</title>
 </head>
 
@@ -75,21 +76,21 @@
                 addButton.innerHTML = 'Add result';
                 addButton.classList.add("edit-button");
                 addButton.onclick = function () {
-                    onAdd(doc.data().dateOfBirth, doc.data().password);
+                    onRedirect(doc.id, 'result');
                 };
 
                 var scheduleButton = document.createElement('button');
                 scheduleButton.innerHTML = 'Schedule testing';
                 scheduleButton.classList.add("edit-button");
                 scheduleButton.onclick = function () {
-                    onSchedule(doc.data().dateOfBirth, doc.data().password);
+                    onRedirect(doc.id, 'schedule');
                 };
 
                 var riskButton = document.createElement('button');
                 riskButton.innerHTML = 'Update risk';
                 riskButton.classList.add("edit-button");
                 riskButton.onclick = function () {
-                    onRisk(doc.data().dateOfBirth, doc.data().password);
+                    onRedirect(doc.id, 'risk');
                 };
 
                 cell.appendChild(addButton);
@@ -99,16 +100,10 @@
             })
         });
 
-        function onAdd(dob, password) {
-            console.log(dob, password);
-        }
-
-        function onSchedule(dob, password) {
-            console.log(dob, password);
-        }
-
-        function onRisk(dob, password) {
-            console.log(dob, password);
+        function onRedirect(id, task) {
+            Cookies.set('docId', id);
+            Cookies.set('task', task)
+            window.location = 'medicaledit.html';
         }
 
         function sortTable(n) {

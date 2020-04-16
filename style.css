@@ -18,6 +18,7 @@ body {
 .information-header {
     padding-top: 5vh;
     padding-left: 40px;
+    padding-right: 40px;
 }
 
 .portal-header {
@@ -187,6 +188,22 @@ label {
     transition-duration: 0.7s;
     -webkit-transition-duration: 0.7s;
     outline: none;
+}
+
+.doctor-input {
+    height: 20px;
+    font-size: 20px;
+    font-family: 'Sen', sans-serif !important;
+    border: 0px;
+    padding-bottom: 5px;
+    padding-left: 0px;
+    border-bottom: 2px solid black;
+    transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+    outline: none;
+    width: 175px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .patient-input[type="date"] {
