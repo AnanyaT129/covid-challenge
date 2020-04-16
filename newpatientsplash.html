@@ -613,7 +613,8 @@
                 }).then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
                     docId = docRef.id;
-
+                    Cookies.set("docId", docId);
+                    window.location = "patientportal.html";
                 }).catch(function (error) {
                     console.error("Error adding document: ", error);
                     alert("Please fill in all fields.");
@@ -646,7 +647,7 @@
                     console.log("Document written with ID: ", docRef.id);
                     docId = docRef.id;
                     Cookies.set("docId", docId);
-                    window.location = "patientportal.htmsl";
+                    window.location = "patientportal.html";
                 }).catch(function (error) {
                     console.error("Error adding document: ", error);
                     alert("Please fill in all fields.");
