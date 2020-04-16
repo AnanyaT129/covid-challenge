@@ -228,7 +228,6 @@
                 })
             });
 
-            // load appointments
             db.collection("users").get().then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
                     if (doc.id === Cookies.get("docId")) {
@@ -266,8 +265,6 @@
 
             // load risk
 
-
-            // load results
             db.collection("users").get().then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
                     if (doc.id === Cookies.get("docId")) {
