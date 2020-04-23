@@ -320,4 +320,8 @@ label {
         float: none;
         position: absolute;
     }
+
+    .splash-header {
+        margin-top: 15vh;
+    }
 }
