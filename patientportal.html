@@ -14,7 +14,7 @@
 <body>
     <div class="information-box">
         <h1 class="information-header">My actions</h1>
-
+        <a id="information-expand">Click to expand</a>
         <ul class="information-bullets">
             <li><a id="editLink" class="information-link">Edit personal information</a></li>
             <li><a id="apptLink" class="information-link">Check for appointments</a></li>
@@ -22,7 +22,7 @@
             </li>
         </ul>
 
-        <h1 class="information-header">Need help?</h1>
+        <h1 class="information-header" id="information-2">Need help?</h1>
         <p class="information-paragraph">You can use this page to update your personal information (including updating
             your symptoms and information you may have filled out incorrectly).</p>
 
@@ -880,6 +880,66 @@
                 $('.parent-info').css('display', 'table-row');
             }
         }
+
+        let click = 0;
+
+        $("#information-expand").on('click', function (event) {
+            event.preventDefault();
+            if (click % 2 == 0) {
+                var x = document.getElementsByClassName("information-paragraph");
+                for (let i = 0; i < x.length; i++) {
+                    x[i].style.display = 'block';
+                    if (i == x.length - 1) {
+                        x[i].style.paddingBottom = '20px';
+                    }
+                }
+
+                x = document.getElementsByClassName("information-bullets");
+                for (let i = 0; i < x.length; i++) {
+                    x[i].style.display = 'block';
+                }
+
+                x = document.getElementById("information-2");
+                x.style.display = 'block';
+
+                x = document.getElementsByClassName('information-box');
+                x[0].style.height = 'auto !important';
+
+                x = document.getElementsByClassName("information-link");
+                for (let i = 0; i < x.length; i++) {
+                    x[i].style.display = 'inline-flex';
+                }
+                document.getElementById("information-expand").innerHTML = 'Click to minimize';
+
+                click += 1;
+            } else {
+                var x = document.getElementsByClassName("information-paragraph");
+                for (let i = 0; i < x.length; i++) {
+                    x[i].style.display = 'none';
+                    if (i == x.length - 1) {
+                        x[i].style.paddingBottom = '0px';
+                    }
+                }
+
+                var x = document.getElementsByClassName("information-bullets");
+                for (let i = 0; i < x.length; i++) {
+                    x[i].style.display = 'none';
+                }
+
+                x = document.getElementsByClassName('information-box');
+                x[0].style.height = 'auto !important';
+
+                x = document.getElementById("information-2");
+                x.style.display = 'none';
+
+                x = document.getElementsByClassName("information-link");
+                for (let i = 0; i < x.length; i++) {
+                    x[i].style.display = 'none';
+                }
+                document.getElementById("information-expand").innerHTML = 'Click to expand';
+                click += 1;
+            }
+        });
     </script>
 </body>
 
