@@ -21,7 +21,7 @@ body {
     padding-right: 40px;
 }
 
-.information-expand {
+#information-expand {
     text-decoration: none;
     padding-left: 2px;
     padding-right: 2px;
@@ -36,7 +36,7 @@ body {
     display: none;
 }
 
-.information-expand:hover {
+#information-expand:hover {
     color: #ffe6e6;
     background-color: #696969;
     border-bottom: 2px solid black;
@@ -293,15 +293,13 @@ label {
 
     .information-paragraph {
         display: none;
-        width: 0px;
-        height: 0px;
     }
 
     .information-link {
         display: none;
     }
 
-    .information-expand {
+    #information-expand {
         display: inline-flex;
         margin-bottom: 20px;
     }

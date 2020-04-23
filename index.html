@@ -13,7 +13,7 @@
 <body>
     <div class="information-box">
         <h1 class="information-header">Need help?</h1>
-        <a class="information-expand">Click to expand</a>
+        <a id="information-expand">Click to expand</a>
 
         <p class="information-paragraph">This website is for those registering to be tested for Covid-19, and for
             medical professionals and administrators overseeing the testing process.</p>
@@ -45,6 +45,9 @@
     </div>
 
     <script>
+
+        let click = 0;
+
         function newPatientRedirect() {
             window.location = "newpatientsplash.html";
         }
@@ -57,6 +60,47 @@
             window.location = "medicalsplash.html";
         }
 
+        $("#information-expand").on('click', function (event) {
+            event.preventDefault();
+            if (click % 2 == 0) {
+                var x = document.getElementsByClassName("information-paragraph");
+                for (let i = 0; i < x.length; i++) {
+                    x[i].style.display = 'block';
+                    if (i == x.length - 1) {
+                        x[i].style.paddingBottom = '20px';
+                    }
+                }
+
+                x = document.getElementsByClassName('information-box');
+                x[0].style.height = 'auto !important';
+
+                x = document.getElementsByClassName("information-link");
+                for (let i = 0; i < x.length; i++) {
+                    x[i].style.display = 'inline-flex';
+                }
+                document.getElementById("information-expand").innerHTML = 'Click to minimize';
+
+                click += 1;
+            } else {
+                var x = document.getElementsByClassName("information-paragraph");
+                for (let i = 0; i < x.length; i++) {
+                    x[i].style.display = 'none';
+                    if (i == x.length - 1) {
+                        x[i].style.paddingBottom = '0px';
+                    }
+                }
+
+                x = document.getElementsByClassName('information-box');
+                x[0].style.height = 'auto !important';
+
+                x = document.getElementsByClassName("information-link");
+                for (let i = 0; i < x.length; i++) {
+                    x[i].style.display = 'none';
+                }
+                document.getElementById("information-expand").innerHTML = 'Click to expand';
+                click += 1;
+            }
+        });
     </script>
 </body>
 
