@@ -335,19 +335,44 @@ label {
         width: 100vw !important;
     }
 
-    #registration-table {
-        width: 100vw !important;
+    table {
+        width: 80vw !important;
+    }
+
+    td {
+        display: block !important;
+        width: flex !important;
+    }
+
+    .patient-input-address {
+        display: block !important;
+        margin-top: 20px;
+    }
+
+    .patient-input[type="date"] {
+        display: block !important;
+    }
+
+    label {
+        width: 80vw !important;
+        margin-left: 30px !important;
     }
 
     .patient-table-left {
-        display: block;
-        width: 100vw;
+        margin-left: 5px !important;
+        padding-left: 0px !important;
+        margin-right: 5px !important;
+        width: 80vw !important;
+        overflow: none !important;
     }
 
-    .patient-input {
-        display: block;
-        width: 80vw;
-        padding-left: 10vw;
+    body {
+        width: 100vw !important;
+        overflow-x: hidden;
+        margin: 0px !important;
+        padding: 0px !important;
     }
+
+
 
 }
