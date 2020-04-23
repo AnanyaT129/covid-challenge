@@ -327,4 +327,26 @@ label {
         margin-top: 15vh;
     }
 
+    #personal-information-box {
+        width: 100vw !important;
+    }
+
+    #personal-information-box {
+        width: 100vw !important;
+    }
+
+    #registration-table {
+        width: 100vw !important;
+    }
+
+    .patient-table-left {
+        display: block;
+        width: 100vw;
+    }
+
+    .patient-input {
+        display: block;
+        width: 100vw;
+    }
+
 }
