@@ -266,9 +266,9 @@ label {
 #auto-password {
     font-size: 30px !important;
     font-weight: bold;
-    margin-left: 30%;
     text-align: center;
-    width: 40%;
+    margin-left: 15%;
+    margin-right: 15%;
     border-radius: 5px;
     letter-spacing: 7px;
     background-color: #ffe6e6;
@@ -296,6 +296,10 @@ label {
     }
 
     .information-link {
+        display: none;
+    }
+
+    .information-bullets {
         display: none;
     }
 

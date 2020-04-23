@@ -14,6 +14,7 @@
 <body>
     <div class="information-box">
         <h1 class="information-header">How to register</h1>
+        <a id="information-expand">Click to expand</a>
         <p class="information-paragraph">If you are a new patient, you're in the right place! Fillng out the form to the
             right will enable our system to assess your risk level and pass your case on to healthcare professionals.
         </p>
@@ -685,6 +686,50 @@
             document.getElementById("auto-password").innerHTML = password;
 
             // check password for duplicates
+        });
+
+        let click = 0;
+
+        $("#information-expand").on('click', function (event) {
+            event.preventDefault();
+            if (click % 2 == 0) {
+                var x = document.getElementsByClassName("information-paragraph");
+                for (let i = 0; i < x.length; i++) {
+                    x[i].style.display = 'block';
+                    if (i == x.length - 1) {
+                        x[i].style.paddingBottom = '20px';
+                    }
+                }
+
+                x = document.getElementsByClassName('information-box');
+                x[0].style.height = 'auto !important';
+
+                x = document.getElementsByClassName("information-link");
+                for (let i = 0; i < x.length; i++) {
+                    x[i].style.display = 'inline-flex';
+                }
+                document.getElementById("information-expand").innerHTML = 'Click to minimize';
+
+                click += 1;
+            } else {
+                var x = document.getElementsByClassName("information-paragraph");
+                for (let i = 0; i < x.length; i++) {
+                    x[i].style.display = 'none';
+                    if (i == x.length - 1) {
+                        x[i].style.paddingBottom = '0px';
+                    }
+                }
+
+                x = document.getElementsByClassName('information-box');
+                x[0].style.height = 'auto !important';
+
+                x = document.getElementsByClassName("information-link");
+                for (let i = 0; i < x.length; i++) {
+                    x[i].style.display = 'none';
+                }
+                document.getElementById("information-expand").innerHTML = 'Click to expand';
+                click += 1;
+            }
         });
     </script>
 </body>
