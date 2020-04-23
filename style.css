@@ -296,7 +296,7 @@ label {
     }
 
     #information-2 {
-        display: none;
+        display: none !important;
     }
 
     .information-link {
