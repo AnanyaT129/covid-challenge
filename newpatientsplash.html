@@ -85,6 +85,14 @@
             </tr>
 
             <tr>
+                <td class='patient-table-left'>Physician's Office</td>
+                <td>
+                    <input id="physician" class="patient-input" type="text"
+                        placeholder="Orangetown Pediatric Associates PC"></input>
+                </td>
+            </tr>
+
+            <tr>
                 <td class='patient-table-left'>Sex</td>
                 <td>
                     <label>
@@ -489,6 +497,7 @@
             let emailAddress = $("#emailAddress").val();
             let dateOfBirth = $("#dateOfBirth").val();
             let phoneNumber = $("#phoneNumber").val();
+            let physician = $("#physician").val();
             let homeAddress = $("#homeAddress1").val() + ", " + $("#homeAddress2").val();
             let sex = $("input[name='sex']:checked").val();
             let ethnicity = $("input[name='ethnicity']:checked").val();
@@ -620,7 +629,9 @@
                     password: password,
                     appointments: '{}',
                     results: '{}',
-                    testingCenter: centers
+                    physician: physician,
+                    testingCenter: centers,
+                    labs: ''
                 }).then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
                     docId = docRef.id;
@@ -654,7 +665,9 @@
                     password: password,
                     appointments: '{}',
                     results: '{}',
-                    testingCenter: centers
+                    physician: physician,
+                    testingCenter: centers,
+                    labs: ''
                 }).then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
                     docId = docRef.id;

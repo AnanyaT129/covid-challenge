@@ -65,7 +65,7 @@
                     querySnapshot.forEach(function (doc) {
                         if (doc.data().id == $('#id').val()) {
                             if (doc.data().password == $('#password').val()) {
-                                Cookies.set("id", $('#id').val());
+                                Cookies.set("name", doc.data().name);
                                 window.location = "medicalportal.html";
                             }
                         }
@@ -79,7 +79,7 @@
                     querySnapshot.forEach(function (doc) {
                         if (doc.data().id == $('#id').val()) {
                             if (doc.data().password == $('#password').val()) {
-                                Cookies.set("id", $('#id').val());
+                                Cookies.set("name", doc.data().name);
                                 window.location = "medicalportal.html";
                             }
                         }
