@@ -79,8 +79,8 @@
                 <td>
                     <input id="homeAddress1" class="patient-input-address" type="text"
                         placeholder="1 Neverending Road"></input>
-                    <input id="homeAddress2" class="patient-input-address" type="text"
-                        placeholder="Lancaster, PA 17601"></input>
+                    <input id="homeAddress2" class="patient-input-address" type="text" placeholder="Lancaster, PA 17601"
+                        onchange="addTestingCenter(this.value)"></input>
                 </td>
             </tr>
 
@@ -481,6 +481,8 @@
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
 
+        let centers = [];
+
         function register() {
             let firstName = $("#firstName").val();
             let lastName = $("#lastName").val();
@@ -570,8 +572,6 @@
             contacts = contacts.join(", ");
             contacts = contacts.replace(/\,\s\s\(\)/gi, "");
 
-            console.log(contacts);
-
             let password = $("#auto-password").text();
 
             let guardianFirstName = $("#guardianFirstName").val();
@@ -579,6 +579,15 @@
             let guardianPhoneNumber = $("#guardianPhoneNumber").val();
             let guardianEmailAddress = $("#guardianEmailAddress").val();
             let guardianAddress = $("#guardianAddressLine1").val() + ", " + $("#guardianAddressLine2").val();
+
+            console.log(centers);
+
+            if (centers.length == 0) {
+                alert("We regret to inform you that there are no testing centers in your county. You may experience a longer wait for testing.");
+            } else {
+                let chooseCenter = Math.floor(Math.random() * centers.length);
+                centers = centers[chooseCenter];
+            }
 
             let docId;
 
@@ -610,12 +619,13 @@
                     guardianAddress: guardianAddress,
                     password: password,
                     appointments: '{}',
-                    results: '{}'
+                    results: '{}',
+                    testingCenter: centers
                 }).then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
                     docId = docRef.id;
                     Cookies.set("docId", docId);
-                    window.location = "patientportal.html";
+                    //window.location = "patientportal.html";
                 }).catch(function (error) {
                     console.error("Error adding document: ", error);
                     alert("Please fill in all fields.");
@@ -643,12 +653,13 @@
                     contacts: contacts,
                     password: password,
                     appointments: '{}',
-                    results: '{}'
+                    results: '{}',
+                    testingCenter: centers
                 }).then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
                     docId = docRef.id;
                     Cookies.set("docId", docId);
-                    window.location = "patientportal.html";
+                    //window.location = "patientportal.html";
                 }).catch(function (error) {
                     console.error("Error adding document: ", error);
                     alert("Please fill in all fields.");
@@ -664,6 +675,44 @@
             if (Math.abs(age_dt.getUTCFullYear() - 1970) < 18) {
                 $('.parent-info').css('display', 'table-row');
             }
+        }
+
+        function addTestingCenter(addressLine2) {
+            function getCounty(zip) {
+                $.getJSON('zip-codes.json', function (data) {
+                    if (data.length > 0) {
+                        var arrItems = [];
+
+                        $.each(data, function (index, value) {
+                            arrItems.push(value);
+                        });
+
+                        for (var i = 0; i < arrItems.length; i++) {
+                            if (arrItems[i].zip == zip) {
+                                return arrItems[i].county;
+                            }
+                        }
+                    }
+                });
+            }
+
+            function getTestingSites() {
+                let testingCenters = [];
+                var db = firebase.firestore();
+                db.collection("testingsites").get().then(function (querySnapshot) {
+                    querySnapshot.forEach(function (doc) {
+                        let myCounty = getCounty(doc.data().zipCode);
+                        if (myCounty == county) {
+                            console.log('*');
+                            testingCenters.push(doc.data().id);
+                        }
+                    })
+                });
+                return testingCenters;
+            }
+
+            let county = getCounty($("#homeAddress2").val().replace(/\D/g, ''));
+            centers = getTestingSites();
         }
 
         $(document).ready(function () {
