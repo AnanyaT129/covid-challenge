@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link href="https://fonts.googleapis.com/css?family=Sen:400,700&display=swap" rel="stylesheet">
     <title>Covid-19 Challenge</title>
@@ -12,7 +13,80 @@
 
 <body>
 
+    <center style="margin-top:40vh;">
+        <input id="id" class="patient-input" placeholder="T000000000"></input><br><br>
+        <input id="password" class="patient-input" type="number" placeholder="111111111" pattern="[0-9]{9}"
+            required></input>
+        <br><br><br>
+        <button class="patient-button" onclick="redirect()">Sign in</button><br>
+    </center>
+
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
+
     <script>
+
+        var firebaseConfig = {
+            apiKey: "AIzaSyDD7IM5QAOF5y8PCHcmYg7d5ALAOAgcF2g",
+            authDomain: "covid-19-challenge-63dc9.firebaseapp.com",
+            databaseURL: "https://covid-19-challenge-63dc9.firebaseio.com",
+            projectId: "covid-19-challenge-63dc9",
+            storageBucket: "covid-19-challenge-63dc9.appspot.com",
+            messagingSenderId: "16503968884",
+            appId: "1:16503968884:web:0913620e1a13ecddecad21",
+            measurementId: "G-X6ZB7JV3ZG"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        function redirect() {
+            var db = firebase.firestore();
+
+            if ($("#id").val().includes("T")) {
+                Cookies.set("type", "Testing-Center")
+                db.collection("testingsites").get().then(function (querySnapshot) {
+                    querySnapshot.forEach(function (doc) {
+                        if (doc.data().id == $('#id').val()) {
+                            if (doc.data().password == $('#password').val()) {
+                                Cookies.set("id", $('#id').val());
+                                window.location = "medicalportal.html";
+                            }
+                        }
+                    })
+                });
+            }
+
+            if ($("#id").val().includes("P")) {
+                Cookies.set("type", "Physician")
+                db.collection("physicians").get().then(function (querySnapshot) {
+                    querySnapshot.forEach(function (doc) {
+                        if (doc.data().id == $('#id').val()) {
+                            if (doc.data().password == $('#password').val()) {
+                                Cookies.set("id", $('#id').val());
+                                window.location = "medicalportal.html";
+                            }
+                        }
+                    })
+                });
+            }
+
+            if ($("#id").val().includes("L")) {
+                Cookies.set("type", "Laboratory")
+                db.collection("laboratories").get().then(function (querySnapshot) {
+                    querySnapshot.forEach(function (doc) {
+                        if (doc.data().id == $('#id').val()) {
+                            if (doc.data().password == $('#password').val()) {
+                                Cookies.set("id", $('#id').val());
+                                window.location = "medicalportal.html";
+                            }
+                        }
+                    })
+                });
+            }
+        }
     </script>
 </body>
 
