@@ -16,10 +16,10 @@
     <p class="information-paragraph" id="sorting">Sorting by...</p>
     <table id="medical-table">
         <tr>
-            <th id="zero" onclick="sortTable(0)">Patient Name</th>
-            <th id="one" onclick="sortTable(1)">Onset Date</th>
-            <th id="two" onclick="sortTable(2)">Calculated Risk</th>
-            <th id="three" onclick="sortTable(3)">Status</th>
+            <th id="zero" onclick="sortTable(0)"></th>
+            <th id="one" onclick="sortTable(1)"></th>
+            <th id="two" onclick="sortTable(2)"></th>
+            <th id="three" onclick="sortTable(3)"></th>
             <th>Actions</th>
         </tr>
     </table>
@@ -50,11 +50,16 @@
             db.collection("users").get().then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
                     let table = document.getElementById("medical-table");
+
                     if (Cookies.get("type") == "Testing-Center") {
+                        $("#zero").text("Patient ID");
+                        $("#one").text("Onset Date");
+                        $("#two").text("Risk");
+                        $("#three").text("Status");
                         if (doc.data().testingCenter == [Cookies.get("id")]) {
                             var row = table.insertRow(i);
                             var cell = row.insertCell(0);
-                            cell.innerHTML = doc.data().lastName + ', ' + doc.data().firstName;
+                            cell.innerHTML = doc.id;
 
                             cell = row.insertCell(1);
                             cell.innerHTML = doc.data().onsetDate;
@@ -86,7 +91,11 @@
                     }
 
                     if (Cookies.get("type") == "Physician") {
-                        if (doc.data().physician.includes(Cookies.get("name"))) {
+                        if (doc.data().physician == Cookies.get("name")) {
+                            $("#zero").text("Patient Name");
+                            $("#one").text("Onset Date");
+                            $("#two").text("Risk");
+                            $("#three").text("Status");
                             var row = table.insertRow(i);
                             var cell = row.insertCell(0);
                             cell.innerHTML = doc.data().lastName + ', ' + doc.data().firstName;
@@ -121,38 +130,63 @@
                     }
 
                     if (Cookies.get("type") == "Laboratory") {
-                        if (doc.data().labs.includes(Cookies.get("name"))) {
-                            var row = table.insertRow(i);
-                            var cell = row.insertCell(0);
-                            cell.innerHTML = doc.data().lastName + ', ' + doc.data().firstName;
+                        let associatedLab = '';
+                        let testingCenterID = doc.data().testingCenter;
+                        $("#zero").text("Patient ID");
+                        $("#one").text("Testing Dates");
+                        $("#two").text("");
+                        $("#three").text("");
 
-                            cell = row.insertCell(1);
-                            cell.innerHTML = doc.data().onsetDate;
+                        let id = doc.id;
+                        let appts = doc.data().appointments;
+                        db.collection("testingsites").get().then(function (querySnapshot) {
+                            querySnapshot.forEach(function (doc) {
+                                if (doc.data().id == testingCenterID) {
+                                    associatedLab = doc.data().associatedLab;
+                                    if (associatedLab == Cookies.get('name')) {
+                                        if (appts !== "{}") {
+                                            var row = table.insertRow(i);
+                                            var cell = row.insertCell(0);
+                                            cell.innerHTML = id;
 
-                            cell = row.insertCell(2);
-                            cell.innerHTML = 'X';
+                                            cell = row.insertCell(1);
 
-                            cell = row.insertCell(3);
-                            if (doc.data().results === '{}') {
-                                cell.innerHTML = 'Untested';
-                            } else {
-                                let resAry = doc.data().results.split(/\,\s?(?![^\{]*\})/);
-                                let smallAry = resAry[resAry.length - 1].split(',');
-                                cell.innerHTML = smallAry[2].substring(0, smallAry[2].length - 1);
-                            }
+                                            let apptAry = appts.split(/\,\s?(?![^\{]*\})/);
+                                            appts = '';
+                                            for (let i = 0; i < apptAry.length; i++) {
+                                                let smallAry = apptAry[i].split(',');
+                                                if (i !== apptAry.length - 1) {
+                                                    appts += smallAry[0].substring(1) + ', ';
+                                                } else {
+                                                    appts += smallAry[0].substring(1);
+                                                }
 
-                            cell = row.insertCell(4);
+                                            }
 
-                            var addButton = document.createElement('button');
-                            addButton.innerHTML = 'Add result';
-                            addButton.classList.add("edit-button");
-                            addButton.onclick = function () {
-                                onRedirect(doc.id, 'result');
-                            };
+                                            cell.innerHTML = appts;
 
-                            cell.appendChild(addButton);
-                            i++;
-                        }
+                                            cell = row.insertCell(2);
+                                            cell.innerHTML = '';
+
+                                            cell = row.insertCell(3);
+                                            cell.innerHTML = '';
+
+                                            cell = row.insertCell(4);
+
+                                            var addButton = document.createElement('button');
+                                            addButton.innerHTML = 'Add result';
+                                            addButton.classList.add("edit-button");
+                                            addButton.onclick = function () {
+                                                onRedirect(id, 'result');
+                                            };
+
+                                            cell.appendChild(addButton);
+                                            i++;
+                                        }
+                                    }
+                                }
+                            })
+                        })
                     }
                 })
             });
@@ -160,7 +194,7 @@
 
         function onRedirect(id, task) {
             Cookies.set('docId', id);
-            Cookies.set('task', task)
+            Cookies.set('editTask', task);
             window.location = 'medicaledit.html';
         }
 

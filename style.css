@@ -286,6 +286,10 @@ label {
     display: none;
 }
 
+.scrollable-box {
+    overflow-y: auto;
+}
+
 @media only screen and (max-width: 479px) {
     .information-header {
         margin-top: 0px;
@@ -372,7 +376,4 @@ label {
         margin: 0px !important;
         padding: 0px !important;
     }
-
-
-
 }

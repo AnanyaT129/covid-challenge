@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="information-box">
+    <div class="information-box scrollable-box">
         <h1 id="name" class="information-header">Add results for</h1>
         <p id="age" class="information-paragraph"></p>
         <p id="onsetDate" class="information-paragraph"></p>
@@ -110,15 +110,35 @@
         let db = firebase.firestore();
 
         $(document).ready(function () {
+            $('#results-box').css('display', 'block');
+            $('#risk-box').css('display', 'block');
+            $('#appointments-box').css('display', 'block');
+
+            if (Cookies.get('editTask') == 'result') {
+                $('#results-box').css('display', 'block');
+                $('#risk-box').css('display', 'none');
+                $('#appointments-box').css('display', 'none');
+            }
+
+            if (Cookies.get('editTask') == 'schedule') {
+                $('#appointments-box').css('display', 'block');
+                $('#results-box').css('display', 'none');
+                $('#risk-box').css('display', 'none');
+            }
+
+            if (Cookies.get('editTask') == 'risk') {
+                $('#results-box').css('display', 'none');
+                $('#risk-box').css('display', 'block');
+                $('#appointments-box').css('display', 'none');
+            }
             db.collection("users").get().then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
                     if (doc.id === Cookies.get("docId")) {
-                        console.log("in!");
                         document.getElementById("name").innerHTML = 'Edit status for ' + doc.data().firstName + ' ' + doc.data().lastName;
 
                         let birthday = new Date(doc.data().dateOfBirth);
                         var ageDifMs = Date.now() - birthday.getTime();
-                        var ageDate = new Date(ageDifMs); // miliseconds from epoch
+                        var ageDate = new Date(ageDifMs);
                         let age = Math.abs(ageDate.getUTCFullYear() - 1970);
 
                         document.getElementById("age").innerHTML = '<b>Age:</b> ' + age + ' years old';
@@ -300,22 +320,6 @@
                     }
                 })
             });
-
-            $('#results-box').css('display', 'block');
-            $('#risk-box').css('display', 'block');
-            $('#appointments-box').css('display', 'block');
-
-            if (Cookies.get('task') == 'result') {
-                window.location = 'medicaledit.html#results-box'
-            }
-
-            if (Cookies.get('task') == 'schedule') {
-                window.location = 'medicaledit.html#appointments-box'
-            }
-
-            if (Cookies.get('task') == 'risk') {
-                window.location = 'medicaledit.html#risk-box'
-            }
         });
 
         function updateRisk() {
