@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Sen:400,700&display=swap" rel="stylesheet">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
+    <title>Covid-19 Challenge</title>
+</head>
+
+<body>
+    <div class="information-box">
+        <h1 class="information-header">Directions</h1>
+        <a id="information-expand">Click to expand</a>
+
+        <p class="information-paragraph">On this map are places that patients who have tested positive have visited in
+            the past 14 days. If a facility you run or work at is shown on the map, please follow the steps recommended
+            by the CDC <a href="https://www.cdc.gov/coronavirus/2019-ncov/community/disinfecting-building-facility.html"
+                class="information-link">here</a>.</p>
+
+        <p class="information-paragraph"><b>Disclaimer:</b> This project was created as a response to the
+            Combating COVID-19 Challenge. It is not endorsed by or in use by the U.S. Government or any health
+            providers.
+        </p>
+
+    </div>
+
+    <div class="action-box">
+        <center>
+            <div id='map' style='width: 90vh; height: 70vh;'></div>
+        </center>
+    </div>
+
+    <script>
+
+        var compare_dates = function (date1, date2) {
+            if (date1 > date2) return (true);
+            else if (date1 < date2) return (false);
+            else return (true);
+        }
+
+        var firebaseConfig = {
+            apiKey: "AIzaSyDD7IM5QAOF5y8PCHcmYg7d5ALAOAgcF2g",
+            authDomain: "covid-19-challenge-63dc9.firebaseapp.com",
+            databaseURL: "https://covid-19-challenge-63dc9.firebaseio.com",
+            projectId: "covid-19-challenge-63dc9",
+            storageBucket: "covid-19-challenge-63dc9.appspot.com",
+            messagingSenderId: "16503968884",
+            appId: "1:16503968884:web:0913620e1a13ecddecad21",
+            measurementId: "G-X6ZB7JV3ZG"
+        };
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        let db = firebase.firestore();
+
+        mapboxgl.accessToken = 'pk.eyJ1Ijoib2xpdmlhc3RlZ2VyIiwiYSI6ImNqN2ZhZDczajB3YXAycWt5YTQ4Zjc2cnUifQ.EszyqZYKi01tEvk_uXGuZw';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/oliviasteger/ck9hafrkh0nim1jphqrjrl4gs'
+        });
+
+        $(document).ready(function () {
+            db.collection("users").get().then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    if (doc.data().results !== '{}') {
+                        let resAry = doc.data().results.split(/\,\s?(?![^\{]*\})/);
+
+                        for (let i = 0; i < resAry.length; i++) {
+                            let smallAry = resAry[i].split(',');
+                            let a = smallAry[0].substring(1);
+
+                            let c = smallAry[2].substring(0, smallAry[2].length - 1);
+
+                            var ourDate = new Date();
+                            var pastDate = ourDate.getDate() - 14;
+                            ourDate.setDate(pastDate);
+
+                            if (compare_dates(new Date(a), ourDate)) {
+                                if (c == ' Positive') {
+                                    let contactAry = doc.data().contacts.split('),');
+                                    for (let j = 0; j < contactAry.length; j++) {
+                                        let date, address;
+                                        if (j == contactAry.length - 1) {
+                                            date = contactAry[j].substring(contactAry[j].length - 13);
+                                            date = date.substring(2);
+                                            date = date.substring(0, date.length - 1);
+                                            address = contactAry[j].substring(0, contactAry[j].length - 13);
+                                        } else {
+                                            date = contactAry[j].substring(contactAry[j].length - 12);
+                                            date = date.substring(2);
+                                            address = contactAry[j].substring(0, contactAry[j].length - 12);
+                                        }
+
+                                        if (compare_dates(new Date(date), ourDate)) {
+                                            let parts = address.split(', ');
+                                            console.log(parts);
+                                            let url = "https://us1.locationiq.com/v1/search.php?key=807b1670133895&street=" + parts[0] + "&city=" + parts[1] + "&format=json";
+                                            $.getJSON(url, function (data) {
+                                                var popup = new mapboxgl.Popup({ offset: 25 }).setText(
+                                                    address
+                                                );
+                                                var marker = new mapboxgl.Marker({ color: '#ffe6e6' })
+                                                    .setLngLat([Number(data[0].lon), Number(data[0].lat)])
+                                                    .setPopup(popup)
+                                                    .addTo(map);
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                })
+            })
+        });
+    </script>
+</body>
+
+</html>

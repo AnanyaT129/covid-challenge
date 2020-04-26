@@ -68,7 +68,7 @@ body {
 }
 
 .splash-header {
-    margin-top: 35vh;
+    margin-top: 27vh;
     text-align: center;
 }
 
@@ -96,6 +96,26 @@ body {
     background-color: white;
     background-image: none;
     color: #0066ff;
+}
+
+.contact-button {
+    background-image: linear-gradient(to bottom right, #ff8533, #e65c00);
+    width: 250px;
+    height: 50px;
+    border-radius: 5px;
+    border: 2px solid white;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+}
+
+.contact-button:hover {
+    border: 2px solid #ff8533;
+    background-color: white;
+    background-image: none;
+    color: #e65c00;
 }
 
 .edit-button {
@@ -127,6 +147,7 @@ body {
     border: 2px solid white;
     font-size: 20px;
     color: white;
+    margin-bottom: 20px;
     font-weight: bold;
     transition-duration: 0.7s;
     -webkit-transition-duration: 0.7s;
@@ -255,6 +276,10 @@ label {
     display: none;
 }
 
+#map {
+    margin-top: 15vh;
+}
+
 #info-password {
     width: 70%;
     font-size: 20px;
@@ -328,7 +353,11 @@ label {
     }
 
     .splash-header {
-        margin-top: 15vh;
+        margin-top: 10vh;
+    }
+
+    #map {
+        margin-top: 10vh;
     }
 
     #personal-information-box {

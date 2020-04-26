@@ -35,12 +35,13 @@
     </div>
 
     <div class="action-box">
-        <h1 class="splash-header">I am a...</h1>
+        <h1 class="splash-header">I'm looking for</h1>
 
         <center>
-            <button class="patient-button" onclick="newPatientRedirect()">New Patient</button><br>
-            <button class="patient-button" onclick="registeredPatientRedirect()">Registered Patient</button><br>
-            <button class="professional-button" onclick="professionalRedirect()">Medical Professional</button>
+            <button class="patient-button" onclick="newPatientRedirect()">Patient Registration</button><br>
+            <button class="patient-button" onclick="registeredPatientRedirect()">Patient Portal</button><br>
+            <button class="professional-button" onclick="professionalRedirect()">Medical Portal</button><br>
+            <button class="contact-button" onclick="contactRedirect()">Contact Tracing</button>
         </center>
     </div>
 
@@ -58,6 +59,10 @@
 
         function professionalRedirect() {
             window.location = "medicalsplash.html";
+        }
+
+        function contactRedirect() {
+            window.location = "contacttracing.html";
         }
 
         $("#information-expand").on('click', function (event) {

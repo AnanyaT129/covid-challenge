@@ -627,13 +627,22 @@
                         }
 
                         let contactsAry = [];
-                        contactsAry = doc.data().contacts.split(', ');
+                        if (doc.data().contacts !== ' ()') {
+                            contactsAry = doc.data().contacts.split('), ');
 
-                        for (let i = 1; i < contactsAry.length + 1; i++) {
-                            let dateId = "date" + i;
-                            let locationId = "location" + i;
-                            document.getElementById(dateId).value = contactsAry[i - 1].substring(contactsAry[i - 1].length - 11, contactsAry[i - 1].length - 1);
-                            document.getElementById(locationId).value = contactsAry[i - 1].substring(0, contactsAry[i - 1].length - 13);
+                            for (let i = 1; i < contactsAry.length + 1; i++) {
+                                if (i != contactsAry.length) {
+                                    let dateId = "date" + i;
+                                    let locationId = "location" + i;
+                                    document.getElementById(dateId).value = contactsAry[i - 1].substring(contactsAry[i - 1].length - 10, contactsAry[i - 1].length);
+                                    document.getElementById(locationId).value = contactsAry[i - 1].substring(0, contactsAry[i - 1].length - 12);
+                                } else {
+                                    let dateId = "date" + i;
+                                    let locationId = "location" + i;
+                                    document.getElementById(dateId).value = contactsAry[i - 1].substring(contactsAry[i - 1].length - 11, contactsAry[i - 1].length - 1);
+                                    document.getElementById(locationId).value = contactsAry[i - 1].substring(0, contactsAry[i - 1].length - 12);
+                                }
+                            }
                         }
                     }
                 })
