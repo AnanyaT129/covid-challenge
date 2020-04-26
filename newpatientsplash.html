@@ -728,6 +728,10 @@
             centers = getTestingSites();
         }
 
+        let uniquePassword = false;
+        let passwordCounter = 0;
+        let passwordCounterCheck = 0;
+
         $(document).ready(function () {
             let password = "";
 
@@ -735,19 +739,24 @@
                 password += Math.floor(Math.random() * 10);
             }
 
-            /*
-            db.collection("users").get().then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
-                    if (doc.data().password == password) {
+            while (uniquePassword == false) {
+                db.collection("users").get().then(function (querySnapshot) {
+                    querySnapshot.forEach(function (doc) {
+                        passwordCounterCheck += 1;
+                        if (doc.data().password == password) {
+                            passwordCounter = 0;
+                        } else {
+                            passwordCounter++;
+                        }
+                    })
 
+                    if (passwordCounterCheck == passwordCounter) {
+                        uniquePassword = true;
                     }
                 })
-            })
-            */
+            }
 
             document.getElementById("auto-password").innerHTML = password;
-
-            // check password for duplicates
         });
 
         let click = 0;

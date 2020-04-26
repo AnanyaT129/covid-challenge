@@ -134,7 +134,11 @@
             db.collection("users").get().then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
                     if (doc.id === Cookies.get("docId")) {
-                        document.getElementById("name").innerHTML = 'Edit status for ' + doc.data().firstName + ' ' + doc.data().lastName;
+                        if (Cookies.get('editTask') == 'result' || Cookies.get('editTask') == 'schedule') {
+                            document.getElementById("name").innerHTML = 'Edit status for ' + doc.id;
+                        } else {
+                            document.getElementById("name").innerHTML = 'Edit status for ' + doc.data().firstName + ' ' + doc.data().lastName;
+                        }
 
                         let birthday = new Date(doc.data().dateOfBirth);
                         var ageDifMs = Date.now() - birthday.getTime();
@@ -282,8 +286,6 @@
                     }
                 })
             });
-
-            // load risk
 
             db.collection("users").get().then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
