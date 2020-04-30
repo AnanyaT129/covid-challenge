@@ -54,7 +54,7 @@
             else return (true);
         }
 
-        function getRisk(document) {
+        function getChance(document) {
             let p = 0;
 
             if (document.data().symptoms.includes("Fever > 100.4F")) {
@@ -142,7 +142,7 @@
             }
         }
 
-        function getChance(document) {
+        function getRisk(document) {
             let p = 0;
 
             if (document.data().existingConditions.includes("Diabetes Mellitus")) {
