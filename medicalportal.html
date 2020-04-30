@@ -72,9 +72,21 @@
                 p += 0.1097826087;
             } else if (document.data().existingConditions.includes("Cardiovascular disease")) {
                 p += 0.03847619048;
+            } else if (document.data().existingConditions.includes("Immunocompromised condition")) {
+                p += 0.2;
+            } else if (document.data().existingConditions.includes("Asthma")) {
+                p += 0.001646090535;
+            } else if (document.data().existingConditions.includes("COPD")) {
+                p += 0.007214285714;
             }
 
-            console.log(p);
+            if (document.data().exposures !== '') {
+                p += 0.03314903458;
+            }
+
+            if (document.data().healthcareWorker == "Yes") {
+                p += 0.06246137509;
+            }
         }
 
         $(document).ready(function () {
