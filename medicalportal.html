@@ -47,6 +47,12 @@
 
         let i = 1;
 
+        var compare_dates = function (date1, date2) {
+            if (date1 > date2) return (true);
+            else if (date1 < date2) return (false);
+            else return (true);
+        }
+
         function getRisk(document) {
             let p = 0;
 
@@ -78,6 +84,20 @@
                 p += 0.001646090535;
             } else if (document.data().existingConditions.includes("COPD")) {
                 p += 0.007214285714;
+            } else if (document.data().existingConditions.includes("Hypertension")) {
+                p += 0.09538888889;
+            } else if (document.data().existingConditions.includes("Cancer")) {
+                p += 0.01402777778;
+            } else if (document.data().existingConditions.includes("Ronchi (Rattling in the chest)")) {
+                p += 0.03721052632;
+            } else if (document.data().existingConditions.includes("Wheezing")) {
+                p += 0.02142424242;
+            } else if (document.data().existingConditions.includes("Fatigue")) {
+                p += 0.137562724;
+            } else if (document.data().existingConditions.includes("Loss of smell")) {
+                p += 0.2790418605;
+            } else if (document.data().existingConditions.includes("Loss of taste")) {
+                p += 0.2368184211;
             }
 
             if (document.data().exposures !== '') {
@@ -87,13 +107,45 @@
             if (document.data().healthcareWorker == "Yes") {
                 p += 0.06246137509;
             }
+
+            let sixty = new Date(new Date().setFullYear(new Date().getFullYear() - 60));
+            let dob = new Date(document.data().dateOfBirth);
+
+            if (compare_dates(sixty, dob)) {
+                p += 0.05010382894;
+                console.log(document.data().dateOfBirth);
+            }
+
+            let dateOfOnset = document.data().onsetDate;
+
+            let lowDays = new Date();
+            lowDays.setDate(lowDays.getDate() - 3);
+
+            let middleDays = new Date();
+            middleDays.setDate(middleDays.getDate() - 8);
+
+            if (compare_dates(dateOfOnset, lowDays)) {
+                p += 0.05877279651;
+            } else {
+                if (compare_dates(dateOfOnset, middleDays)) {
+                    p += 0.07655862533;
+                } else {
+                    p += 0.03295474662;
+                }
+            }
+
+            if (p > 0.29127367) {
+                return 'High';
+            } else {
+                return 'Low';
+            }
         }
 
         $(document).ready(function () {
             db.collection("users").get().then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
 
-                    getRisk(doc);
+                    let risk = getRisk(doc);
                     let table = document.getElementById("medical-table");
 
                     if (Cookies.get("type") == "Testing-Center") {
@@ -110,7 +162,7 @@
                             cell.innerHTML = doc.data().onsetDate;
 
                             cell = row.insertCell(2);
-                            cell.innerHTML = 'X';
+                            cell.innerHTML = risk;
 
                             cell = row.insertCell(3);
                             if (doc.data().appointments === '{}') {
@@ -153,7 +205,7 @@
                             cell.innerHTML = doc.data().onsetDate;
 
                             cell = row.insertCell(2);
-                            cell.innerHTML = 'X';
+                            cell.innerHTML = risk;
 
                             cell = row.insertCell(3);
                             if (doc.data().results === '{}') {
