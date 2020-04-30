@@ -114,7 +114,6 @@
 
             if (compare_dates(sixty, dob)) {
                 p += 0.05010382894;
-                console.log(document.data().dateOfBirth);
             }
 
             let dateOfOnset = document.data().onsetDate;
@@ -145,6 +144,12 @@
         function getRisk(document) {
             let p = 0;
 
+            if (document.data().risk == "High" || document.data().risk == "Low") {
+                return document.data().risk;
+            } else if (document.data().risk == "Medium") {
+                return document.data().risk;
+            }
+
             if (document.data().existingConditions.includes("Diabetes Mellitus")) {
                 p += 0.1097826087;
             } else if (document.data().existingConditions.includes("Cardiovascular disease")) {
@@ -174,7 +179,6 @@
 
             if (compare_dates(sixty, dob)) {
                 p += 0.05010382894;
-                console.log(document.data().dateOfBirth);
             }
 
             let dateOfOnset = document.data().onsetDate;
@@ -375,7 +379,6 @@
         }
 
         function sortTable(n) {
-            console.log("Sorting...");
             if (n === 0) {
                 if (Cookies.get("type") == "Testing-Center" || Cookies.get("type") == "Laboratory") {
                     document.getElementById('sorting').innerHTML = "Sorting by patient ID";
