@@ -46,9 +46,42 @@
         let db = firebase.firestore();
 
         let i = 1;
+
+        function getRisk(document) {
+            let p = 0;
+
+            if (document.data().symptoms.includes("Fever > 100.4F")) {
+                p += 0.2437931034;
+            } else if (document.data().symptoms.includes("Cough (new or worsening chronic cough)")) {
+                p += 0.0808;
+            } else if (document.data().symptoms.includes("Diarrhea (≥3 loose/looser than normal stools/24hr period)")) {
+                p += 0.006378947368;
+            } else if (document.data().symptoms.includes("Headache")) {
+                p += 0.03914728682;
+            } else if (document.data().symptoms.includes("Shortness of breath (dyspnea)")) {
+                p += 0.04144708423;
+            } else if (document.data().symptoms.includes("Runny nose (rhinorrhea)")) {
+                p += 0.004429824561;
+            } else if (document.data().symptoms.includes("Muscle aches (myalgia)")) {
+                p += 0.09734939759;
+            } else if (document.data().symptoms.includes("Sore throat")) {
+                p += 0.05847368421;
+            }
+
+            if (document.data().existingConditions.includes("Diabetes Mellitus")) {
+                p += 0.1097826087;
+            } else if (document.data().existingConditions.includes("Cardiovascular disease")) {
+                p += 0.03847619048;
+            }
+
+            console.log(p);
+        }
+
         $(document).ready(function () {
             db.collection("users").get().then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
+
+                    getRisk(doc);
                     let table = document.getElementById("medical-table");
 
                     if (Cookies.get("type") == "Testing-Center") {
