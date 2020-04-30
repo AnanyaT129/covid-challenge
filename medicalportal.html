@@ -20,6 +20,7 @@
             <th id="one" onclick="sortTable(1)"></th>
             <th id="two" onclick="sortTable(2)"></th>
             <th id="three" onclick="sortTable(3)"></th>
+            <th id="four" onclick="sortTable(4)"></th>
             <th>Actions</th>
         </tr>
     </table>
@@ -72,6 +73,16 @@
                 p += 0.09734939759;
             } else if (document.data().symptoms.includes("Sore throat")) {
                 p += 0.05847368421;
+            } else if (document.data().symptoms.includes("Ronchi (Rattling in the chest)")) {
+                p += 0.03721052632;
+            } else if (document.data().symptoms.includes("Wheezing")) {
+                p += 0.02142424242;
+            } else if (document.data().symptoms.includes("Fatigue")) {
+                p += 0.137562724;
+            } else if (document.data().symptoms.includes("Loss of smell")) {
+                p += 0.2790418605;
+            } else if (document.data().symptoms.includes("Loss of taste")) {
+                p += 0.2368184211;
             }
 
             if (document.data().existingConditions.includes("Diabetes Mellitus")) {
@@ -88,16 +99,6 @@
                 p += 0.09538888889;
             } else if (document.data().existingConditions.includes("Cancer")) {
                 p += 0.01402777778;
-            } else if (document.data().existingConditions.includes("Ronchi (Rattling in the chest)")) {
-                p += 0.03721052632;
-            } else if (document.data().existingConditions.includes("Wheezing")) {
-                p += 0.02142424242;
-            } else if (document.data().existingConditions.includes("Fatigue")) {
-                p += 0.137562724;
-            } else if (document.data().existingConditions.includes("Loss of smell")) {
-                p += 0.2790418605;
-            } else if (document.data().existingConditions.includes("Loss of taste")) {
-                p += 0.2368184211;
             }
 
             if (document.data().exposures !== '') {
@@ -141,18 +142,82 @@
             }
         }
 
+        function getChance(document) {
+            let p = 0;
+
+            if (document.data().existingConditions.includes("Diabetes Mellitus")) {
+                p += 0.1097826087;
+            } else if (document.data().existingConditions.includes("Cardiovascular disease")) {
+                p += 0.03847619048;
+            } else if (document.data().existingConditions.includes("Immunocompromised condition")) {
+                p += 0.2;
+            } else if (document.data().existingConditions.includes("Asthma")) {
+                p += 0.001646090535;
+            } else if (document.data().existingConditions.includes("COPD")) {
+                p += 0.007214285714;
+            } else if (document.data().existingConditions.includes("Hypertension")) {
+                p += 0.09538888889;
+            } else if (document.data().existingConditions.includes("Cancer")) {
+                p += 0.01402777778;
+            }
+
+            if (document.data().exposures !== '') {
+                p += 0.03314903458;
+            }
+
+            if (document.data().healthcareWorker == "Yes") {
+                p += 0.06246137509;
+            }
+
+            let sixty = new Date(new Date().setFullYear(new Date().getFullYear() - 60));
+            let dob = new Date(document.data().dateOfBirth);
+
+            if (compare_dates(sixty, dob)) {
+                p += 0.05010382894;
+                console.log(document.data().dateOfBirth);
+            }
+
+            let dateOfOnset = document.data().onsetDate;
+
+            let lowDays = new Date();
+            lowDays.setDate(lowDays.getDate() - 3);
+
+            let middleDays = new Date();
+            middleDays.setDate(middleDays.getDate() - 8);
+
+            if (compare_dates(dateOfOnset, lowDays)) {
+                p += 0.05877279651;
+            } else {
+                if (compare_dates(dateOfOnset, middleDays)) {
+                    p += 0.07655862533;
+                } else {
+                    p += 0.03295474662;
+                }
+            }
+
+            if (p > 0.1515) {
+                return 'High';
+            } else if (p <= 0.155 && p > 0.1295) {
+                return 'Medium';
+            } else {
+                return 'Low';
+            }
+        }
+
         $(document).ready(function () {
             db.collection("users").get().then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
 
+                    let chance = getChance(doc);
                     let risk = getRisk(doc);
                     let table = document.getElementById("medical-table");
 
                     if (Cookies.get("type") == "Testing-Center") {
                         $("#zero").text("Patient ID");
                         $("#one").text("Onset Date");
-                        $("#two").text("Risk");
-                        $("#three").text("Status");
+                        $("#two").text("Chance of Covid-19");
+                        $("#three").text("Medical Risk");
+                        $("#four").text("Status");
                         if (doc.data().testingCenter == [Cookies.get("id")]) {
                             var row = table.insertRow(i);
                             var cell = row.insertCell(0);
@@ -162,9 +227,12 @@
                             cell.innerHTML = doc.data().onsetDate;
 
                             cell = row.insertCell(2);
-                            cell.innerHTML = risk;
+                            cell.innerHTML = chance;
 
                             cell = row.insertCell(3);
+                            cell.innerHTML = risk;
+
+                            cell = row.insertCell(4);
                             if (doc.data().appointments === '{}') {
                                 cell.innerHTML = 'Untested';
                             } else {
@@ -177,7 +245,7 @@
                                 }
                             }
 
-                            cell = row.insertCell(4);
+                            cell = row.insertCell(5);
 
                             var scheduleButton = document.createElement('button');
                             scheduleButton.innerHTML = 'Schedule testing';
@@ -195,8 +263,9 @@
                         if (doc.data().physician == Cookies.get("name")) {
                             $("#zero").text("Patient Name");
                             $("#one").text("Onset Date");
-                            $("#two").text("Risk");
-                            $("#three").text("Status");
+                            $("#two").text("Chance of Covid-19");
+                            $("#three").text("Medical Risk");
+                            $("#four").text("Status");
                             var row = table.insertRow(i);
                             var cell = row.insertCell(0);
                             cell.innerHTML = doc.data().lastName + ', ' + doc.data().firstName;
@@ -205,9 +274,12 @@
                             cell.innerHTML = doc.data().onsetDate;
 
                             cell = row.insertCell(2);
-                            cell.innerHTML = risk;
+                            cell.innerHTML = chance;
 
                             cell = row.insertCell(3);
+                            cell.innerHTML = risk;
+
+                            cell = row.insertCell(4);
                             if (doc.data().results === '{}') {
                                 cell.innerHTML = 'Untested';
                             } else {
@@ -216,7 +288,7 @@
                                 cell.innerHTML = smallAry[2].substring(0, smallAry[2].length - 1);
                             }
 
-                            cell = row.insertCell(4);
+                            cell = row.insertCell(5);
 
                             var riskButton = document.createElement('button');
                             riskButton.innerHTML = 'Update risk';
