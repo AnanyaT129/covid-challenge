@@ -248,6 +248,11 @@ label {
     margin-bottom: 20px;
 }
 
+#map {
+    width: 90vh;
+    height: 70vh;
+}
+
 .patient-input[type="date"] {
     width: 110px;
 }
@@ -358,6 +363,7 @@ label {
 
     #map {
         margin-top: 10vh;
+        width: 90vw !important;
     }
 
     #personal-information-box {
